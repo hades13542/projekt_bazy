@@ -23,5 +23,9 @@ class database
         $line = pg_fetch_all($result);
         return $line;
     }
+
+    public function saveRec($obj){
+        pg_query_params("insert into aaa (idtable_01,name) values ($1,$2)",Array($obj->idtable_01,$obj->name));
+    }
 }
 

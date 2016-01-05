@@ -30,7 +30,18 @@ class baza extends controller
     }
 
     function insertRec(){
-        $this->layout->header = 'Not implemented (yet)';
+        $this->layout->header = 'Wprowadzanie do bazy';
+        $this->view = new view('form');
+        $this->layout->content = $this->view;
         return $this->layout;
+    }
+
+    function saveRec() {
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->idtable_01) and isset($obj->name) ){
+            $response = $this->model->saveRec($obj);
+        }
+        return ($response ? "Dodano rekord" : "Blad");
     }
 }
