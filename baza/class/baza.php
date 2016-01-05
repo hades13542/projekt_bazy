@@ -42,6 +42,6 @@ class baza extends controller
         if(isset($obj->idtable_01) and isset($obj->name) ){
             $response = $this->model->saveRec($obj);
         }
-        return ($response ? "Dodano rekord" : "Blad");
+        return ($response ? "Dodano rekord" : var_dump($obj));
     }
 }
