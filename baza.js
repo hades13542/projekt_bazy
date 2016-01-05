@@ -12,16 +12,9 @@ function fn_save() {
         // alert ( response ) ;
         document.getElementById("response").innerHTML = response;
     }
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: msg,
-    }).done(function (response) {
-        console.log("DZIAŁAM KURWA i wypisuję" + response);
-        console.log(json_data);
-    });
+    xmlhttpPost(url,msg,resp);
 }
-/*
+
 function xmlhttpPost(strURL, mess, respFunc) {
     var xmlHttpReq = false;
     var self = this;
@@ -52,4 +45,3 @@ function xmlhttpPost(strURL, mess, respFunc) {
     self.xmlHttpReq.send(mess);
 }
 
-*/
