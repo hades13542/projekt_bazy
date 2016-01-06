@@ -14,9 +14,43 @@ function fn_save() {
     }
     xmlhttpPost(url,msg,resp);
 }
+//Zapisywanie do prostego dodawania
+function fn_saveSimple(){
+    var nazwa = document.getElementById("nazwa").value;
+    var data_wydania = document.getElementById("data_wydania").value;
+    var opis = document.getElementById("opis").value;
+    var ocena = document.getElementById("ocena").value;
+    var multiplayer = document.getElementById("multiplayer").checked;
+    document.getElementById("data").style.display = "none";
+    var flag = checkSimple(data_wydania,ocena);
+    if (flag) {
+        var json_data = "{\"nazwa\":\"" + nazwa + "\",\"data_wydania\":\"" + data_wydania + "\",\"opis\":\"" + opis + "\",\"ocena\":\"" + ocena + "\",\"multiplayer\":\"" + multiplayer + "\"}";
+        var msg = "data=" + encodeURIComponent(json_data);
+        var url = "index.php?sub=baza&action=saveSimple";
+        resp = function (response) {
+            document.getElementById("response").innerHTML = response;
+        }
+        console.log(json_data);
+        xmlhttpPost(url, msg, resp);
+    }else{
+        document.getElementById("response").innerHTML = "Czekaj";
+        alert("Błednie podane dane!");
+        location.reload();
+
+    }
+}
+
+function checkSimple(data_wydania,ocena){
+    var is_date = /\b\d{4}[-]?\d{2}[-]?\d{2}\b/;
+    var is_ocena = /[1-9]|10/;
+    var flag = 1;
+    if(!is_date.test(data_wydania) || !is_ocena.test(ocena)){
+        flag=0;
+    }
+    return flag;
+}
 
 function xmlhttpPost(strURL, mess, respFunc) {
-    var xmlHttpReq = false;
     var self = this;
     // Mozilla/Safari
     if (window.XMLHttpRequest) {
@@ -28,9 +62,7 @@ function xmlhttpPost(strURL, mess, respFunc) {
     }
     self.xmlHttpReq.onreadystatechange = function() {
         if(self.xmlHttpReq.readyState == 4){
-            // alert ( self.xmlHttpReq.status ) ;
             if ( self.xmlHttpReq.status == 200 ) {
-                // document.getElementById("data").innerHTML = http_request.responseText;
                 respFunc( self.xmlHttpReq.responseText ) ;
             }
             else if ( self.xmlHttpReq.status == 401 ) {

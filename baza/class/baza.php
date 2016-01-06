@@ -31,9 +31,28 @@ class baza extends controller
 
     function insertRec(){
         $this->layout->header = 'Wprowadzanie do bazy';
-        $this->view = new view('form');
+        $this->view = new view('insert');
+        //$this->view = new view('form');
         $this->layout->content = $this->view;
         return $this->layout;
+    }
+
+    function insertSimple(){
+        $this->layout->header = 'Podaj podstawowe dane o grze i swoją ocenę';
+        $this->view = new view('simpleForm');
+        //$this->view = new view('form');
+        $this->layout->content = $this->view;
+        return $this->layout;
+    }
+
+    function saveSimple(){
+        //TODO: dopisać!
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa) and isset($obj->data_wydania) and isset($obj->opis) and isset($obj->ocena) and isset($obj->multiplayer)){
+            $response = $this->model->saveSimple($obj);
+        }
+        return ($response ? "Dodano rekord" : "ERROR");
     }
 
     function saveRec() {
@@ -42,6 +61,6 @@ class baza extends controller
         if(isset($obj->idtable_01) and isset($obj->name) ){
             $response = $this->model->saveRec($obj);
         }
-        return ($response ? "Dodano rekord" : var_dump($obj));
+        return ($response ? "Dodano rekord" : "ERROR!");
     }
 }
