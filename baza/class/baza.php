@@ -94,7 +94,7 @@ class baza extends controller
             $response = $this->model->search($obj);
         }
         if($response){
-            $this->view->cos = new view("test");
+            $this->view->cos = new view('table')
             $this->layout->content = $this->view;
             return $this->layout;
         }else{
