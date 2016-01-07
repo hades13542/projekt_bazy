@@ -94,7 +94,8 @@ class baza extends controller
             $response = $this->model->search($obj);
         }
         if($response){
-            $this->view = new view('test');
+            $this->view->cos = new view("test");
+            $this->layout->content = $this->view;
             return $this->layout;
         }else{
             return "Takiego rekordu nie ma w bazie!";

@@ -3,3 +3,8 @@
     <input type="button" value="Szukaj" onclick="search()" />
     <p id="response"></p>
 </form>
+
+
+<?php
+    echo $cos;
+?>
