@@ -3,8 +3,8 @@
         <tr><td><label for="nazwa">Nazwa gry:</label></td>
             <td><input value="<?php if(isset($formData)) echo $formData['nazwa']; ?>" type="text" id="nazwa" name="nazwa" /></td></tr>
 
-        <tr><td><label for="data_wydania">Data wydania (YYYY-MM-DD):</label></td>
-            <td><input value="<?php if(isset($formData)) echo $formData['data_wydania']; ?>" type="text" id="data_wydania" name="data_wydania" /></td></tr>
+        <tr><td><label for="data_wydania">Data wydania):</label></td>
+            <td><input value="<?php if(isset($formData)) echo $formData['data_wydania']; ?>" type="date" id="data_wydania" name="data_wydania" /></td></tr>
 
         <tr><td><label for="opis">Krótki opis gry:</label></td>
             <td><input value="<?php if(isset($formData)) echo $formData['opis']; ?>" type="text" id="opis" name="opis" /></td></tr>
@@ -19,3 +19,4 @@
             <td><span id="response"></span></td></tr>
     </table>
 </form>
+<div id="kolejny"><input type="button" value="Dodaj Kolejny" onclick="handleButtonKolejny()" /></div>

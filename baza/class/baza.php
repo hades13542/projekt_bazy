@@ -45,8 +45,23 @@ class baza extends controller
         return $this->layout;
     }
 
+    function insertKategorie(){
+        $this->layout->header = 'Dodaj kategorię której nie ma w bazie';
+        $this->view = new view('kategorieForm');
+        $this->layout->content = $this->view;
+        return $this->layout;
+    }
+
+    function saveKategorie(){
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa)){
+            $response = $this->model->saveKategorie($obj);
+        }
+        return ($response ? "Dodano rekord" : "ERROR");
+    }
+
     function saveSimple(){
-        //TODO: dopisać!
         $data = $_POST['data'];
         $obj = json_decode($data);
         if(isset($obj->nazwa) and isset($obj->data_wydania) and isset($obj->opis) and isset($obj->ocena) and isset($obj->multiplayer)){

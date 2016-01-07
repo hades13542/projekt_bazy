@@ -18,10 +18,16 @@ class database
     }
 
     public function listAll(){
-        $this->sql = 'select * from aaa';
+        $this->sql = 'select * from gra';
         $result = pg_query($this->sql) or die('Nieprawidlowe zapytanie '. pg_last_error());
         $line = pg_fetch_all($result);
         return $line;
+
+    }
+
+    public function saveKategorie($obj){
+        $res = pg_query_params("insert into kategoria (nazwa) values ($1);", Array($obj->nazwa));
+        return $res;
     }
 
     public function saveSimple($obj){

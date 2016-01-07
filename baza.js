@@ -22,7 +22,7 @@ function fn_saveSimple(){
     var ocena = document.getElementById("ocena").value;
     var multiplayer = document.getElementById("multiplayer").checked;
     document.getElementById("data").style.display = "none";
-    var flag = checkSimple(data_wydania,ocena);
+    var flag = checkSimple(ocena);
     if (flag) {
         var json_data = "{\"nazwa\":\"" + nazwa + "\",\"data_wydania\":\"" + data_wydania + "\",\"opis\":\"" + opis + "\",\"ocena\":\"" + ocena + "\",\"multiplayer\":\"" + multiplayer + "\"}";
         var msg = "data=" + encodeURIComponent(json_data);
@@ -32,6 +32,7 @@ function fn_saveSimple(){
         }
         console.log(json_data);
         xmlhttpPost(url, msg, resp);
+        document.getElementById("kolejny").style.display = "block";
     }else{
         document.getElementById("response").innerHTML = "Czekaj";
         alert("Błednie podane dane!");
@@ -40,11 +41,30 @@ function fn_saveSimple(){
     }
 }
 
-function checkSimple(data_wydania,ocena){
-    var is_date = /\b\d{4}[-]?\d{2}[-]?\d{2}\b/;
+//zapisywanie kategorii
+function fn_saveKategorie(){
+    var kategoria = document.getElementById("kategoria").value;
+    document.getElementById("kategoria").style.display = "none";
+        var json_data = "{\"nazwa\":\"" + kategoria + "\"}";
+        var msg = "data=" + encodeURIComponent(json_data);
+        var url = "index.php?sub=baza&action=saveKategotrie";
+        document.getElementById("data").style.display = "none";
+        resp = function (response) {
+            document.getElementById("response").innerHTML = response;
+        }
+        console.log(json_data);
+        xmlhttpPost(url, msg, resp);
+        document.getElementById("kolejny").style.display = "block";
+    }
+
+function handleButtonKolejny(){
+    location.reload();
+}
+function checkSimple(ocena){
+
     var is_ocena = /[1-9]|10/;
     var flag = 1;
-    if(!is_date.test(data_wydania) || !is_ocena.test(ocena)){
+    if(!is_ocena.test(ocena)){
         flag=0;
     }
     return flag;

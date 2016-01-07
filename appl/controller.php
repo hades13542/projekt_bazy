@@ -17,6 +17,7 @@ abstract class controller {
         $this->menu = file_get_contents ('template/menu.tpl') ;
     }
 
+
     static function http404() {
         header('HTTP/1.1 404 Not Found') ;
         print '<!doctype html><html><head><title>404 Not Found</title></head><body><p>Invalid URL</p></body></html>' ;

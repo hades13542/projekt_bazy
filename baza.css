@@ -14,6 +14,9 @@ footer { clear:both; text-align:center; color:blue }
 
 dt { font-weight: bold; }
 dd { font-style: italic; }
+#kolejny{
+    display:none;
+}
 /*div.main { padding-left: 15px; }*/
 /*p.point { font-weight: bold; }*/
 /*p.text { padding-left: 30px; }*/
