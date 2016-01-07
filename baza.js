@@ -44,10 +44,9 @@ function fn_saveSimple(){
 //zapisywanie kategorii
 function fn_saveKategorie(){
     var kategoria = document.getElementById("kategoria").value;
-    document.getElementById("kategoria").style.display = "none";
         var json_data = "{\"nazwa\":\"" + kategoria + "\"}";
         var msg = "data=" + encodeURIComponent(json_data);
-        var url = "index.php?sub=baza&action=saveKategotrie";
+        var url = "index.php?sub=baza&action=saveKategorie";
         document.getElementById("data").style.display = "none";
         resp = function (response) {
             document.getElementById("response").innerHTML = response;
@@ -68,6 +67,19 @@ function checkSimple(ocena){
         flag=0;
     }
     return flag;
+}
+
+function search(){
+    //TODO: DOpisac!
+    var szukane = document.getElementById("name").value;
+    var json_data = "{\"nazwa\":\"" + szukane + "\"}";
+    var msg = "data=" + encodeURIComponent(json_data);
+    var url = "index.php?sub=baza&action=searchFunc";
+    resp = function (response) {
+        document.getElementById("response").innerHTML = response;
+    }
+    console.log(json_data);
+    xmlhttpPost(url, msg, resp);
 }
 
 function xmlhttpPost(strURL, mess, respFunc) {

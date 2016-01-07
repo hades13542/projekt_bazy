@@ -35,6 +35,10 @@ class database
         return $res;
     }
 
+    public function search($obj){
+        $res = pg_query("");
+        return $res;
+    }
     public function saveRec($obj){
 
         $res = pg_query_params("insert into aaa (idtable_01,name) values ($1,$2);", Array($obj->idtable_01,$obj->name));

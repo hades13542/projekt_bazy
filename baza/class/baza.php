@@ -29,6 +29,12 @@ class baza extends controller
         return $this->layout ;
     }
 
+    function search(){
+        $this->view = new view('search') ;
+        $this->layout->content = $this->view;
+        return $this->layout ;
+    }
+
     function insertRec(){
         $this->layout->header = 'Wprowadzanie do bazy';
         $this->view = new view('insert');
@@ -52,13 +58,15 @@ class baza extends controller
         return $this->layout;
     }
 
+    //obsluga po kliknieciu
+
     function saveKategorie(){
         $data = $_POST['data'];
         $obj = json_decode($data);
         if(isset($obj->nazwa)){
             $response = $this->model->saveKategorie($obj);
         }
-        return ($response ? "Dodano rekord" : "ERROR");
+        return ($response ? "Dodano rekord" : "Podany rekord już istnieje lub zerwano połączenie z bazą. Spróbuj ponownie.");
     }
 
     function saveSimple(){
@@ -67,7 +75,7 @@ class baza extends controller
         if(isset($obj->nazwa) and isset($obj->data_wydania) and isset($obj->opis) and isset($obj->ocena) and isset($obj->multiplayer)){
             $response = $this->model->saveSimple($obj);
         }
-        return ($response ? "Dodano rekord" : "ERROR");
+        return ($response ? "Dodano rekord" : "Podano błędne wartości lub zerwano połączenie z bazą. Spróbuj ponownie.");
     }
 
     function saveRec() {
@@ -77,5 +85,19 @@ class baza extends controller
             $response = $this->model->saveRec($obj);
         }
         return ($response ? "Dodano rekord" : "ERROR!");
+    }
+
+    function searchFunc(){
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->name)){
+            $response = $this->model->search($obj);
+        }
+        if($response){
+            $this->view = new view('test');
+            return $this->layout;
+        }else{
+            return "Takiego rekordu nie ma w bazie!";
+        }
     }
 }

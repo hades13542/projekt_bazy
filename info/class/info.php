@@ -35,6 +35,7 @@ class info extends controller {
         return $this->layout ;
     }
 
+
     function test(){
         $this->model = new model();
         $this->layout->header = "TESt";
