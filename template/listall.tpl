@@ -8,7 +8,7 @@
                 }else{
                     $row['multiplayer'] = "TAK";
                 }
-                echo '<tr><td>'. $row['idgra'] .'</td><td>'.$row['nazwa'].'</td><td>'.$row['data_wydania'].'</td><td>'.$row['opis'].'</td><td>'.$row['ocena'].'</td><td>'.$row['multiplayer'].'</td></tr>';
+                echo '<tr><td>'. $row['idgra'] .'</td><td>'.$row['nazwa'].'</td><td>'.$row['data_wydania'].'</td><td>'.$row['opis'].'</td><td>'. round($row['ocena'],2) .'</td><td>'.$row['multiplayer'].'</td></tr>';
             }
         }
     ?>

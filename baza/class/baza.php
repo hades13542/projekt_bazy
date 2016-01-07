@@ -90,7 +90,7 @@ class baza extends controller
     function searchFunc(){
         $data = $_POST['data'];
         $obj = json_decode($data);
-        if(isset($obj->name)){
+        if(isset($obj->nazwa)){
             $response = $this->model->search($obj);
         }
         if($response){
