@@ -30,6 +30,7 @@ class baza extends controller
     }
 
     function search(){
+        $this->layout->header = 'Wyszukaj rekord który znajduje się w bazie (brak odpowiedzi oznacza nie istniejący rekord/błędne zapytanie)' ;
         $this->view = new view('search') ;
         $this->layout->content = $this->view;
         return $this->layout ;
@@ -88,13 +89,21 @@ class baza extends controller
     }
 
     function searchFunc(){
-        $data = $_POST['data'];
-        $obj = json_decode($data);
-        if(isset($obj->nazwa)){
-            $response = $this->model->search($obj);
-        }
-
-        return $response ? $response :"Takiego rekordu nie ma w bazie!";
-
+            $flag =0;
+            $string = "<h1>";
+            $data = $_POST['data'];
+            $obj = json_decode($data);
+            if(isset($obj->nazwa)){
+                $response = $this->model->search($obj);
+            }
+            foreach ($data as $row) {
+                if ($row['multiplayer'] == f){
+                    $row['multiplayer'] = "NIE";
+                }else{
+                    $row['multiplayer'] = "TAK";
+                }
+                $string = $string. $row['nazwa'] .'</h1><br><h3>Data wydania: '. $row['data_wydania'] .' Średnia ocena: '. $row['ocena'].' Multiplayer: '. $row['multiplayer'] .'</h3><br>Opis gry: '.$row['opis'];
+            }
+            return $string . "<br>";//$response->nazwa;//print_r($response);
     }
 }
