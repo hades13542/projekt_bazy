@@ -36,7 +36,7 @@ class database
     }
 
     public function search($obj){
-        $res = pg_query_params("select * from gra where nazwa like $1;", Array($obj->nazwa));
+        $res = pg_query_params("select * from gra where nazwa like '$1';", Array($obj->nazwa));
         return $res;
     }
     public function saveRec($obj){
