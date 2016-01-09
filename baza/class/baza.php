@@ -89,21 +89,24 @@ class baza extends controller
     }
 
     function searchFunc(){
-            $flag =0;
-            $string = "<h1>";
-            $data = $_POST['data'];
-            $obj = json_decode($data);
-            if(isset($obj->nazwa)){
-                $response = $this->model->search($obj);
+        $flag =0;
+        $string = '<h3>';
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa)){
+            $response = $this->model->search($obj);
+        }
+        //$test = json_encode($response);
+
+        foreach ($response as $row) {
+            if ($row['multiplayer'] == 'f'){
+                $row['multiplayer'] = "NIE";
+            }else{
+                $row['multiplayer'] = "TAK";
             }
-            foreach ($data as $row) {
-                if ($row['multiplayer'] == f){
-                    $row['multiplayer'] = "NIE";
-                }else{
-                    $row['multiplayer'] = "TAK";
-                }
-                $string = $string. $row['nazwa'] .'</h1><br><h3>Data wydania: '. $row['data_wydania'] .' Średnia ocena: '. $row['ocena'].' Multiplayer: '. $row['multiplayer'] .'</h3><br>Opis gry: '.$row['opis'];
-            }
-            return $string . "<br>";//$response->nazwa;//print_r($response);
+            $string = $string . ''.$row['nazwa'].'</h3><br>Data wydania:&nbsp'.$row['data_wydania'].'&nbsp&nbsp&nbsp&nbspOcena:&nbsp'. round($row['ocena'],2) .'&nbsp&nbsp&nbsp&nbspMultiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br><br><br>'.$row['opis'].'';
+
+        }
+        return $string . '<br>';//$row['nazwa'];//$string;//$response->nazwa;//print_r($response);
     }
 }

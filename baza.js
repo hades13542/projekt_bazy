@@ -70,7 +70,6 @@ function checkSimple(ocena){
 }
 
 function search(){
-    //TODO: DOpisac!
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";
     var msg = "data=" + encodeURIComponent(json_data);

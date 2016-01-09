@@ -31,8 +31,13 @@ class database
     }
 
     public function saveSimple($obj){
+        pg_query("begin;");
         $res = pg_query_params("insert into gra (nazwa,data_wydania,opis,ocena,multiplayer) values ($1,$2,$3,$4,$5);", Array($obj->nazwa,$obj->data_wydania,$obj->opis,$obj->ocena,$obj->multiplayer));
-        return $res;
+        if($res) {
+            return $res;
+        }else{
+            pg_query("rollback;");
+        }
     }
 
     public function search($obj){
