@@ -41,6 +41,46 @@ function fn_saveSimple(){
     }
 }
 
+function fn_saveAdvanced(){
+    var array1 = [];
+    var array2 = [];
+    //console.log($('.kat')[0]);
+    $('.kat:checked').each(function (){
+        array1.push(this.value);
+    });
+    $('.plat:checked').each(function (){
+        array2.push(this.value);
+    });
+
+    var nazwa = document.getElementById("nazwa").value;
+    var data_wydania = document.getElementById("data_wydania").value;
+    var opis = document.getElementById("opis").value;
+    var ocena = document.getElementById("ocena").value;
+    var multiplayer = document.getElementById("multiplayer").checked;
+    var producent = document.getElementById("producent").value;
+    var wydawca = document.getElementById("wydawca").value;
+    var wydawca_pl = document.getElementById("wydawca_pl").value;
+    var kategorie = array1.toString();
+    var platformy = array2.toString();
+    document.getElementById("data").style.display = "none";
+    var flag = checkSimple(ocena);
+    if (flag) {
+        var json_data = "{\"nazwa\":\"" + nazwa + "\",\"data_wydania\":\"" + data_wydania + "\",\"opis\":\"" + opis + "\",\"ocena\":\"" + ocena + "\",\"multiplayer\":\"" + multiplayer + "\",\"producent\":\"" + producent + "\",\"wydawca\":\"" + wydawca + "\",\"wydawca_pl\":\"" + wydawca_pl + "\",\"kategorie\":\"" + kategorie + "\",\"platformy\":\"" + platformy + "\"}";
+        var msg = "data=" + encodeURIComponent(json_data);
+        var url = "index.php?sub=baza&action=saveAdvanced";
+        resp = function (response) {
+            document.getElementById("response").innerHTML = response;
+        }
+        console.log(json_data);
+        xmlhttpPost(url, msg, resp);
+        document.getElementById("kolejny").style.display = "block";
+    }else{
+        document.getElementById("response").innerHTML = "Czekaj";
+        alert("Błednie podane dane!");
+        location.reload();
+
+    }
+}
 //zapisywanie kategorii
 function fn_saveKategorie(){
     var kategoria = document.getElementById("kategoria").value;

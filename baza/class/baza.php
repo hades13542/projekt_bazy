@@ -59,6 +59,14 @@ class baza extends controller
         return $this->layout;
     }
 
+    function insertAdvanced(){
+        $this->layout->header = 'Dodaj informację o grze do bazy';
+        $this->view = new view('advancedForm');
+        $this->view->kat = $this->model->getKategorie();
+        $this->view->platformy = $this->model->getPlatformy();
+        $this->layout->content = $this->view;
+        return $this->layout;
+    }
     //obsluga po kliknieciu
 
     function saveKategorie(){
@@ -79,6 +87,14 @@ class baza extends controller
         return ($response ? "Dodano rekord" : "Podano błędne wartości lub zerwano połączenie z bazą. Spróbuj ponownie.");
     }
 
+    function saveAdvanced(){
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa) and isset($obj->data_wydania) and isset($obj->opis) and isset($obj->ocena) and isset($obj->multiplayer)){
+            $response = $this->model->saveAdvanced($obj);
+        }
+        return ($response ? "Dodano rekord" : "Podano błędne wartości lub zerwano połączenie z bazą. Spróbuj ponownie.");
+    }
     function saveRec() {
         $data = $_POST['data'];
         $obj = json_decode($data);

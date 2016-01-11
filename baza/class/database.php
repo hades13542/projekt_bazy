@@ -40,16 +40,39 @@ class database
         }
     }
 
+    public function saveAdvanced($obj){
+        pg_query("begin;");
+        $res = pg_query_params("select insert_advanced($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);", Array($obj->nazwa,$obj->data_wydania,$obj->opis,$obj->ocena,$obj->multiplayer,$obj->producent,$obj->wydawca,$obj->wydawca_pl,$obj->kategorie,$obj->platformy));
+        if($res) {
+            return $res;
+        }else{
+            pg_query("rollback;");
+        }
+    }
     public function search($obj){
         $res = pg_query_params("select * from gra where nazwa like $1;", Array($obj->nazwa));
         return pg_fetch_all($res);
 
     }
+
     public function saveRec($obj){
 
         $res = pg_query_params("insert into aaa (idtable_01,name) values ($1,$2);", Array($obj->idtable_01,$obj->name));
         return $res;
+    }
 
+    public function getKategorie(){
+        $this->sql = 'select * from kategoria ORDER BY NAZWA';
+        $result = pg_query($this->sql) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        $line = pg_fetch_all($result);
+        return $line;
+    }
+
+    public function getPlatformy(){
+        $this->sql = 'select * from platforma ORDER BY NAZWA';
+        $result = pg_query($this->sql) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        $line = pg_fetch_all($result);
+        return $line;
     }
 }
 
