@@ -3,11 +3,11 @@
     echo $cos;
 ?>
 <div id="szukaj">
-<form>
-    <input type="text" id="name" name="name" />
-    <input type="button" value="Szukaj" onclick="search()" />
-    <p id="response"></p>
-</form>
+    <form>
+        <input type="text" id="name" name="name" />
+        <input type="button" value="Szukaj" onclick="search()" />
+        <p id="response"></p>
+    </form>
 </div>
 <div id="ocena">
     <form>
