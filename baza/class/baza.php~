@@ -109,7 +109,7 @@ class baza extends controller
         if(isset($obj->nazwa) and isset($obj->producent)){
             $response = $this->model->savePlatformy($obj);
         }
-        return ($response) ? "Dodano rekord" : "Podano błędne wartości lub zerwano połączenie z bazą. Spróbuj ponownie.";
+        return $response;// ? "Dodano rekord" : "Podano błędne wartości lub zerwano połączenie z bazą. Spróbuj ponownie.");
     }
 
     function saveRec() {

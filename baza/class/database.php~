@@ -47,7 +47,7 @@ class database
         if($res) {
 	    //echo "dziala";
 	    pg_query("commit");
-            return $res;
+            return "dziala";
         }else{
             pg_query("rollback");
             return pg_last_error();
