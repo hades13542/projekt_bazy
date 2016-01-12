@@ -67,6 +67,13 @@ class baza extends controller
         $this->layout->content = $this->view;
         return $this->layout;
     }
+
+    function insertPlatformy(){
+        $this->layout->header = 'Dodaj nową platformę do bazy';
+        $this->view = new view('platformyForm');
+        $this->layout->content = $this->view;
+        return $this->layout;
+    }
     //obsluga po kliknieciu
 
     function saveKategorie(){
@@ -95,6 +102,16 @@ class baza extends controller
         }
         return ($response ? "Dodano rekord" : "Podano błędne wartości lub zerwano połączenie z bazą. Spróbuj ponownie.");
     }
+
+    function savePlatformy(){
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa) and isset($obj->platformy)){
+            $response = $this->model->savePlatformy($obj);
+        }
+        return ($response ? "Dodano rekord" : "Podano błędne wartości lub zerwano połączenie z bazą. Spróbuj ponownie.");
+    }
+
     function saveRec() {
         $data = $_POST['data'];
         $obj = json_decode($data);

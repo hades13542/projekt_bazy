@@ -47,8 +47,21 @@ class database
             return $res;
         }else{
             pg_query("rollback;");
+            return pg_errormessage();
         }
     }
+
+    public function savePlatformy($obj){
+        pg_query("begin;");
+        $res = pg_query_params("insert into platforma (nazwa,producent) VALUES ($1,$2);", Array($obj->nazwa,$obj->producent));
+        if($res) {
+            return $res;
+        }else{
+            pg_query("rollback;");
+            return pg_errormessage();
+        }
+    }
+
     public function search($obj){
         $res = pg_query_params("select * from gra where nazwa like $1;", Array($obj->nazwa));
         return pg_fetch_all($res);

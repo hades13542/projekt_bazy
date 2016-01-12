@@ -41,6 +41,20 @@ function fn_saveSimple(){
     }
 }
 
+
+function fn_savePlatformy(){
+    var nazwa = document.getElementById("nazwa").value;
+    var producent = document.getElementById("producent").value;
+    document.getElementById("data").style.display = "none";
+    var json_data = "{\"nazwa\":\"" + nazwa + "producent\":\"" + producent + "\"}";
+    var msg = "data=" + encodeURIComponent(json_data);
+    var url = "index.php?sub=baza&action=savePlatformy";
+    resp = function (response) {
+        document.getElementById("response").innerHTML = response;
+    }
+    console.log(json_data);
+    xmlhttpPost(url, msg, resp);
+}
 function fn_saveAdvanced(){
     var array1 = [];
     var array2 = [];
