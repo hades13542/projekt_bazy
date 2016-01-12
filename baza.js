@@ -56,6 +56,7 @@ function fn_savePlatformy(){
     xmlhttpPost(url, msg, resp);
 	document.getElementById("kolejny").style.display = "block";
 }
+
 function fn_saveAdvanced(){
     var array1 = [];
     var array2 = [];
@@ -134,6 +135,7 @@ function search(){
     }
     console.log(json_data);
     xmlhttpPost(url, msg, resp);
+    document.getElementById("ocena").style.display = "block";
 }
 
 function xmlhttpPost(strURL, mess, respFunc) {

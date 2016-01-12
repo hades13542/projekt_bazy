@@ -45,8 +45,8 @@ class database
         pg_query("begin");
         $res = pg_query_params("select insert_advanced($1,$2,$3,$4,$5,$6,$7,$8,$9,$10);", Array($obj->nazwa,$obj->data_wydania,$obj->opis,$obj->ocena,$obj->multiplayer,$obj->producent,$obj->wydawca,$obj->wydawca_pl,$obj->kategorie,$obj->platformy));
         if($res) {
-	    //echo "dziala";
-	    pg_query("commit");
+	        //echo "dziala";
+	        pg_query("commit");
             return $res;
         }else{
             pg_query("rollback");
@@ -58,13 +58,13 @@ class database
         pg_query("begin");
         $res = pg_query_params("insert into platforma (nazwa,producent) VALUES ($1,$2);", Array($obj->nazwa,$obj->producent));
         if($res) {
-	//echo "dziala";
-	pg_query("commit");
+	        //echo "dziala";
+	        pg_query("commit");
             return $res;
         }else{
-	//echo "niedziala";
-           pg_query("rollback");
-           return pg_last_error();
+            //echo "niedziala";
+            pg_query("rollback");
+            return pg_last_error();
         }
 
     }

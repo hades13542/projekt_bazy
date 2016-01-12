@@ -17,6 +17,12 @@ dd { font-style: italic; }
 #kolejny{
     display:none;
 }
+#ocena{
+    display: none;
+}
+#szukaj{
+    display: block;
+}
 /*div.main { padding-left: 15px; }*/
 /*p.point { font-weight: bold; }*/
 /*p.text { padding-left: 30px; }*/
