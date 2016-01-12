@@ -40,3 +40,4 @@
     <tr><td><span id="data"><input type="button" value="Zapisz" onclick="fn_saveAdvanced()" /></span></td>
         <td><span id="response"></span></td></tr>
 </form>
+<div id="kolejny"><input type="button" value="Dodaj Kolejny" onclick="handleButtonKolejny()" /></div>
