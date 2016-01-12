@@ -9,7 +9,7 @@
     </form>
 </div>
 <p id="response"></p>
-<div id="ocena">
+<div id="ocena_div">
     <form>
         <input type="text" id="ocena" name="ocena" />
         <input type="button" value="Oceń!" onclick="ocena_change()" />

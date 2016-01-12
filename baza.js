@@ -135,7 +135,7 @@ function search(){
     }
     console.log(json_data);
     xmlhttpPost(url, msg, resp);
-    document.getElementById("ocena").style.display = "block";
+    document.getElementById("ocena_div").style.display = "block";
     document.getElementById("szukaj").style.display = "none";
 }
 
