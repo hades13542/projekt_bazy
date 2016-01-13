@@ -125,6 +125,18 @@ function checkSimple(ocena){
     return flag;
 }
 
+function ocena_change(){
+    var ocena = document.getElementbyId("ocena").value;
+    var json_data = "{\"ocena\":\"" + ocena + "\"}";
+    var msg = "data=" + encodeURIComponent(json_data);
+    var url = "index.php?sub=baza&action=ocena_change";
+    resp = function (response) {
+        document.getElementById("response_ocena").innerHTML = response;
+    }
+    console.log(json_data);
+    xmlhttpPost(url, msg, resp);
+}
+
 function search(){
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";

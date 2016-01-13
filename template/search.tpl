@@ -15,3 +15,4 @@
         <input type="button" value="Oceń!" onclick="ocena_change()" />
     </form>
 </div>
+<p id="response_ocena"></p>

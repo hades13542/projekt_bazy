@@ -75,6 +75,20 @@ class database
 
     }
 
+    public function ocena_change($obj,$id){
+        pg_query("begin");
+        $res = pg_query_params("select ocena_change($1,$2);", Array($id,$obj->ocena));
+        if($res) {
+            //echo "dziala";
+            pg_query("commit");
+            return $res;
+        }else{
+            //echo "niedziala";
+            pg_query("rollback");
+            return pg_last_error();
+        }
+    }
+
     public function saveRec($obj){
 
         $res = pg_query_params("insert into aaa (idtable_01,name) values ($1,$2);", Array($obj->idtable_01,$obj->name));

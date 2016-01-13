@@ -17,6 +17,9 @@ dd { font-style: italic; }
 #kolejny{
     display:none;
 }
+#id{
+    display: none;
+}
 #ocena_div{
     display: none;
 }
