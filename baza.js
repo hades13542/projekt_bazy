@@ -126,7 +126,7 @@ function checkSimple(ocena){
 }
 
 function ocena_change(){
-    var ocena = document.getElementbyId("ocena").value;
+    var ocena = document.getElementById("ocena").value;
     var json_data = "{\"ocena\":\"" + ocena + "\"}";
     var msg = "data=" + encodeURIComponent(json_data);
     var url = "index.php?sub=baza&action=ocena_change";

@@ -6,7 +6,6 @@
  * Date: 05.01.16
  * Time: 00:41
  */
-$id = 0;
 
 class baza extends controller
 {
@@ -16,7 +15,6 @@ class baza extends controller
     function __construct()
     {
         parent::__construct();
-        $this->id =0;
         $this->layout = new view('main');
         $this->model = new database();
         $this->layout->css = $this->css;
@@ -89,11 +87,10 @@ class baza extends controller
     }
 
     function ocena_change(){
-        global $id;
         $data = $_POST['data'];
         $obj = json_decode($data);
         if(isset($obj->ocena)){
-            $response = $this->model->ocena_change($obj,$id);
+            $response = $this->model->ocena_change($obj);
         }
         return ($response ? "Dodano ocenę" : "Ocenianie nie powiodło się");
     }
@@ -153,8 +150,7 @@ class baza extends controller
             $string = $string . ''.$row['nazwa'].'</h3><br>Data wydania:&nbsp'.$row['data_wydania'].'&nbsp&nbsp&nbsp&nbspOcena:&nbsp'. round($row['ocena'],2) .'&nbsp&nbsp&nbsp&nbspMultiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br><br><br>'.$row['opis'].'';
 
         }
-        global $id;
-        $id = $row['idgra'];
+        $this->$id = $row['idgra'];
         return $string . '<br>';//$row['nazwa'];//$string;//$response->nazwa;//print_r($response);
     }
 }
