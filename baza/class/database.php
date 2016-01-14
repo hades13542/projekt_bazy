@@ -79,11 +79,11 @@ class database
         pg_query("begin");
         $res = pg_query_params("select ocena_change($1,$2);", Array($id,$obj->ocena));
         if($res) {
-            echo "dziala";
+            //echo "dziala";
             pg_query("commit");
             return $res;
         }else{
-            echo "niedziala";
+            //echo "niedziala";
             pg_query("rollback");
             return pg_last_error();
         }

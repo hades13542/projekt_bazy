@@ -126,14 +126,14 @@ function checkSimple(ocena){
 }
 
 function ocena_change(){
-    var ocena = document.getElementbyId("ocena").value;
+    var ocena = document.getElementById("ocena").value;
     var json_data = "{\"ocena\":\"" + ocena + "\"}";
     var msg = "data=" + encodeURIComponent(json_data);
     var url = "index.php?sub=baza&action=ocena_change";
     resp = function (response) {
         document.getElementById("response_ocena").innerHTML = response;
     }
-    console.log(json_data);
+    console.log(resp);
     xmlhttpPost(url, msg, resp);
 }
 
@@ -145,7 +145,7 @@ function search(){
     resp = function (response) {
         document.getElementById("response").innerHTML = response;
     }
-    console.log(json_data);
+    console.log(resp);
     xmlhttpPost(url, msg, resp);
     document.getElementById("ocena_div").style.display = "block";
     document.getElementById("szukaj").style.display = "none";

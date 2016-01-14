@@ -76,16 +76,15 @@ class database
     }
 
     public function ocena_change($obj,$id){
-        //pg_query("begin");
+        pg_query("begin");
         $res = pg_query_params("select ocena_change($1,$2);", Array($id,$obj->ocena));
         if($res) {
             //echo "dziala";
-		echo $id;
-            //pg_query("commit");
+            pg_query("commit");
             return $res;
         }else{
             //echo "niedziala";
-            //pg_query("rollback");
+            pg_query("rollback");
             return pg_last_error();
         }
     }

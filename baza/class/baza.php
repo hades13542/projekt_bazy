@@ -11,7 +11,7 @@ class baza extends controller
 {
     protected $layout ;
     protected $model ;
-    public $id;
+    //public $id;
     function __construct()
     {
         parent::__construct();
@@ -87,10 +87,15 @@ class baza extends controller
     }
 
     function ocena_change(){
+	if (isset($_COOKIE['ID'])) {
+  	$id = unserialize($_COOKIE['ID']);
+	} else {
+        $id = 0;
+       }
         $data = $_POST['data'];
         $obj = json_decode($data);
         if(isset($obj->ocena)){
-            $response = $this->model->ocena_change($obj);
+            $response = $this->model->ocena_change($obj,$id);
         }
         return ($response ? "Dodano ocenę" : "Ocenianie nie powiodło się");
     }
@@ -151,8 +156,8 @@ class baza extends controller
 
         }
         //TODO: kurwa jak to ogarniac
-        global $id;
-        $id = $row['idgra'];
+	$id = $row['idgra'];
+	setcookie('ID', serialize($id), 0);
         return $string . '<br>';//$row['nazwa'];//$string;//$response->nazwa;//print_r($response);
     }
 }
