@@ -145,7 +145,7 @@ function search(){
     resp = function (response) {
         document.getElementById("response").innerHTML = response;
     }
-    console.log(json_data);
+    console.log(resp);
     xmlhttpPost(url, msg, resp);
     document.getElementById("ocena_div").style.display = "block";
     document.getElementById("szukaj").style.display = "none";

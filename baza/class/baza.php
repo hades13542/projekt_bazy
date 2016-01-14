@@ -33,6 +33,7 @@ class baza extends controller
     function search(){
         $this->layout->header = 'Wyszukaj rekord który znajduje się w bazie (brak odpowiedzi oznacza nie istniejący rekord/błędne zapytanie)' ;
         $this->view = new view('search') ;
+        $this->view->odpowiedz = $this->model->searchtest();
         $this->layout->content = $this->view;
         return $this->layout ;
     }
