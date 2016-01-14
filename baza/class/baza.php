@@ -33,7 +33,13 @@ class baza extends controller
     function search(){
         $this->layout->header = 'Wyszukaj rekord który znajduje się w bazie (brak odpowiedzi oznacza nie istniejący rekord/błędne zapytanie)' ;
         $this->view = new view('search') ;
-        $this->view->odpowiedz = $this->model->searchtest();
+        $this->layout->content = $this->view;
+        return $this->layout ;
+    }
+
+    function searchKat(){
+        $this->layout->header = 'Wyszukaj gry z danej kategorii' ;
+        $this->view = new view('searchKat') ;
         $this->layout->content = $this->view;
         return $this->layout ;
     }
@@ -135,6 +141,19 @@ class baza extends controller
             $response = $this->model->saveRec($obj);
         }
         return ($response ? "Dodano rekord" : "ERROR!");
+    }
+
+    function searchKategorie(){
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa)){
+            $response = $this->model->searchKategorie($obj);
+        }
+        $string = '<tr><td>Nazwa Gry</td><td>Ocena</td><tr>';
+        foreach($response as $row){
+            $string = $string . '<tr><td>'.$row['nazwa_gry'].'</td><td>'.$row['ocena'].'</td></tr>';
+        }
+        return $string;
     }
 
     function searchFunc(){

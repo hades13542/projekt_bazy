@@ -17,12 +17,6 @@ class database
         self::$dbconn = pg_connect(self::$conn_string) or die('Nie mozna polaczyc z baza' . pg_last_error());
     }
 
-    public function searchtest(){
-        $this->sql = 'SELECT * FROM szukanie WHERE nazwa=\'Fableqw\';';
-        $result = pg_query($this->sql) or die('Nieprawidlowe zapytanie '. pg_last_error());
-        $line = pg_fetch_all($result);
-        return $line;
-    }
     public function listAll(){
         $this->sql = 'select * from gra';
         $result = pg_query($this->sql) or die('Nieprawidlowe zapytanie '. pg_last_error());
@@ -78,6 +72,12 @@ class database
     public function search($obj){
 
         $result = pg_query_params('select szukanie.*, gra.idgra from szukanie join gra on gra.nazwa = szukanie.nazwa where szukanie.nazwa = $1;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        $line = pg_fetch_all($result);
+        return $line;
+    }
+
+    public function searchKategorie($obj){
+        $result = pg_query_params('select nazwa_gry,ocena from szukanie_kategorii where kategoria like $1;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
         $line = pg_fetch_all($result);
         return $line;
     }
