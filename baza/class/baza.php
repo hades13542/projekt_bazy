@@ -149,10 +149,11 @@ class baza extends controller
         if(isset($obj->nazwa)){
             $response = $this->model->searchKategorie($obj);
         }
-        $string = '<tr><td>Nazwa Gry</td><td>Ocena</td><tr>';
+        $string = '<table><tr><td>Nazwa Gry</td><td>Ocena</td>';
         foreach($response as $row){
             $string = $string . '<tr><td>'.$row['nazwa_gry'].'</td><td>'.$row['ocena'].'</td></tr>';
         }
+	$string = $string . '</table>';
         return $string;
     }
 

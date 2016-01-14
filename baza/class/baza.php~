@@ -33,7 +33,13 @@ class baza extends controller
     function search(){
         $this->layout->header = 'Wyszukaj rekord który znajduje się w bazie (brak odpowiedzi oznacza nie istniejący rekord/błędne zapytanie)' ;
         $this->view = new view('search') ;
-        $this->view->odpowiedz = $this->model->searchtest();
+        $this->layout->content = $this->view;
+        return $this->layout ;
+    }
+
+    function searchKat(){
+        $this->layout->header = 'Wyszukaj gry z danej kategorii' ;
+        $this->view = new view('searchKat') ;
         $this->layout->content = $this->view;
         return $this->layout ;
     }
@@ -137,6 +143,19 @@ class baza extends controller
         return ($response ? "Dodano rekord" : "ERROR!");
     }
 
+    function searchKategorie(){
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa)){
+            $response = $this->model->searchKategorie($obj);
+        }
+        $string = '<tr><td>Nazwa Gry</td><td>Ocena</td>';
+        foreach($response as $row){
+            $string = $string . '<tr><td>'.$row['nazwa_gry'].'</td><td>'.$row['ocena'].'</td></tr>';
+        }
+        return $string;
+    }
+
     function searchFunc(){
         $flag =0;
         $string = '<h3>';
@@ -172,7 +191,7 @@ class baza extends controller
             }else{
                 $row['multiplayer'] = "TAK";
             }
-            $string = $string . ''.$row['nazwa'].'</h3><br>Data wydania:&nbsp'.$data.'&nbsp&nbsp&nbsp&nbsp<br>Producent:&nbsp'.$producent.'Wydawca:&nbsp'.$wydawca.'&nbsp&nbsp&nbsp&nbsp Wydawca w Polsce&nbsp'.$wydawca_pl.'<br>Ocena:&nbsp'.$ocena.'&nbsp&nbsp&nbsp&nbspIlosc ocen: '.$ilosc_ocen.'<br>Multiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br>Kategorie: '.$kategoria.'<br>Platformy:'.$platformy.'<br><br>'.$opis.'';
+            $string = $string . ''.$row['nazwa'].'</h3>Data wydania:&nbsp'.$data.'&nbsp&nbsp&nbsp&nbsp<br>Producent:&nbsp'.$producent.'Wydawca:&nbsp'.$wydawca.'&nbsp&nbsp&nbsp&nbsp Wydawca w Polsce&nbsp'.$wydawca_pl.'<br>Ocena:&nbsp'.$ocena.'&nbsp&nbsp&nbsp&nbspIlosc ocen: '.$ilosc_ocen.'<br>Multiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br>Kategorie: '.$kategoria.'<br>Platformy:'.$platformy.'<br><br>'.$opis.'';
 
         }
         //TODO: kurwa jak to ogarniac

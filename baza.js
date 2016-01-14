@@ -151,7 +151,7 @@ function search(){
     document.getElementById("szukaj").style.display = "none";
 }
 
-function search(){
+function searchKat(){
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";
     var msg = "data=" + encodeURIComponent(json_data);
