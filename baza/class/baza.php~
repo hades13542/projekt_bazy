@@ -33,6 +33,7 @@ class baza extends controller
     function search(){
         $this->layout->header = 'Wyszukaj rekord który znajduje się w bazie (brak odpowiedzi oznacza nie istniejący rekord/błędne zapytanie)' ;
         $this->view = new view('search') ;
+        $this->view->odpowiedz = $this->model->searchtest();
         $this->layout->content = $this->view;
         return $this->layout ;
     }
@@ -95,7 +96,7 @@ class baza extends controller
         $data = $_POST['data'];
         $obj = json_decode($data);
         if(isset($obj->ocena)){
-            $response = $this->model->ocena_change($obj);
+            $response = $this->model->ocena_change($obj,$id);
         }
         return ($response ? "Dodano ocenę" : "Ocenianie nie powiodło się");
     }
@@ -144,15 +145,34 @@ class baza extends controller
         if(isset($obj->nazwa)){
             $response = $this->model->search($obj);
         }
-        //$test = json_encode($response);
 
+        //$test = json_encode($response);
         foreach ($response as $row) {
+	$nazwa = $row['nazwa'];
+	$Content = str_replace("{","",$row['data_wydania']);
+	$data = str_replace("}","",$Content);
+	$Content = str_replace("{","",$row['ocena']);
+	$ocena = str_replace("}","",$Content);
+	$Content = str_replace("{","",$row['opis']);
+	$opis = str_replace("}","",$Content);
+	$Content = str_replace("{","",$row['kategoria']);
+	$kategoria = str_replace("}","",$Content);
+	$Content = str_replace("{","",$row['wydawca']);
+	$wydawca = str_replace("}","",$Content);
+	$Content = str_replace("{","",$row['producent']);
+	$producent = str_replace("}","",$Content);
+	$Content = str_replace("{","",$row['wydawca_pl']);
+	$wydawca_pl = str_replace("}","",$Content);
+	$Content = str_replace("{","",$row['platformy']);
+	$platformy = str_replace("}","",$Content);
+	$Content = str_replace("{","",$row['ilosc_ocen']);
+	$ilosc_ocen = str_replace("}","",$Content);
             if ($row['multiplayer'] == 'f'){
                 $row['multiplayer'] = "NIE";
             }else{
                 $row['multiplayer'] = "TAK";
             }
-            $string = $string . ''.$row['nazwa'].'</h3><br>Data wydania:&nbsp'.$row['data_wydania'].'&nbsp&nbsp&nbsp&nbspOcena:&nbsp'. round($row['ocena'],2) .'&nbsp&nbsp&nbsp&nbspMultiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br><br><br>'.$row['opis'].'';
+            $string = $string . ''.$row['nazwa'].'</h3><br>Data wydania:&nbsp'.$data.'&nbsp&nbsp&nbsp&nbsp<br>Producent:&nbsp'.$producent.'Wydawca:&nbsp'.$wydawca.'&nbsp&nbsp&nbsp&nbsp Wydawca w Polsce&nbsp'.$wydawca_pl.'<br>Ocena:&nbsp'.$ocena.'&nbsp&nbsp&nbsp&nbspIlosc ocen: '.$ilosc_ocen.'<br>Multiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br>Kategorie: '.$kategoria.'<br>Platformy:'.$platformy.'<br><br>'.$opis.'';
 
         }
         //TODO: kurwa jak to ogarniac
