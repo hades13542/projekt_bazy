@@ -133,7 +133,7 @@ function ocena_change(){
     resp = function (response) {
         document.getElementById("response_ocena").innerHTML = response;
     }
-    console.log(json_data);
+    console.log(resp);
     xmlhttpPost(url, msg, resp);
 }
 

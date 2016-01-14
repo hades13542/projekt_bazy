@@ -150,7 +150,9 @@ class baza extends controller
             $string = $string . ''.$row['nazwa'].'</h3><br>Data wydania:&nbsp'.$row['data_wydania'].'&nbsp&nbsp&nbsp&nbspOcena:&nbsp'. round($row['ocena'],2) .'&nbsp&nbsp&nbsp&nbspMultiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br><br><br>'.$row['opis'].'';
 
         }
-        $this->$id = $row['idgra'];
+        //TODO: kurwa jak to ogarniac
+        global $id;
+        $id = $row['idgra'];
         return $string . '<br>';//$row['nazwa'];//$string;//$response->nazwa;//print_r($response);
     }
 }
