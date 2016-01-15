@@ -52,7 +52,7 @@ class baza extends controller
     }
 
     function searchOcena(){
-        $this->layout->header = 'Wyszukaj gry na daną platformę' ;
+        $this->layout->header = 'Wyszukaj gry o ocenie wyższej niż podana' ;
         $this->view = new view('searchOcena') ;
         $this->layout->content = $this->view;
         return $this->layout ;
