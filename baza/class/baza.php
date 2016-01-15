@@ -44,6 +44,13 @@ class baza extends controller
         return $this->layout ;
     }
 
+    function searchPlat(){
+        $this->layout->header = 'Wyszukaj gry na daną platformę' ;
+        $this->view = new view('searchPlat') ;
+        $this->layout->content = $this->view;
+        return $this->layout ;
+    }
+
     function insertRec(){
         $this->layout->header = 'Wprowadzanie do bazy';
         $this->view = new view('insert');
@@ -157,11 +164,11 @@ class baza extends controller
         return $string;
     }
 
-    function searchPlat(){
+    function searchPlatformy(){
         $data = $_POST['data'];
         $obj = json_decode($data);
         if(isset($obj->nazwa)){
-            $response = $this->model->searchPlat($obj);
+            $response = $this->model->searchPlatformy($obj);
         }
         $string = '<table><tr><td>Nazwa Gry</td><td>Ocena</td>';
         foreach($response as $row){

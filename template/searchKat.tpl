@@ -6,4 +6,3 @@
     </form>
 </div>
 <p id="response"></p>
-<?php
