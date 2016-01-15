@@ -88,6 +88,12 @@ class database
         return $line;
     }
 
+    public function searchOceny($obj){
+        $result = pg_query_params('select nazwa,ocena,opis,multiplayer from wszystko where ocena > $1 ORDER BY ocena;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        $line = pg_fetch_all($result);
+        return $line;
+    }
+
     public function ocena_change($obj,$id){
         pg_query("begin");
         $res = pg_query_params("select ocena_change($1,$2);", Array($id,$obj->ocena));

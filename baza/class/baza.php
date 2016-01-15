@@ -51,6 +51,13 @@ class baza extends controller
         return $this->layout ;
     }
 
+    function searchOcena(){
+        $this->layout->header = 'Wyszukaj gry na daną platformę' ;
+        $this->view = new view('searchOcena') ;
+        $this->layout->content = $this->view;
+        return $this->layout ;
+    }
+
     function insertRec(){
         $this->layout->header = 'Wprowadzanie do bazy';
         $this->view = new view('insert');
@@ -150,6 +157,25 @@ class baza extends controller
         return ($response ? "Dodano rekord" : "ERROR!");
     }
 
+    function searchOceny(){
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa)){
+            $response = $this->model->searchOceny($obj);
+        }
+        $string = '<table><tr><td>Nazwa Gry</td><td>Ocena</td><td>Opis Gry</td><td>Multiplayer</td>';
+        foreach($response as $row){
+            if ($row['multiplayer'] == f){
+                $row['multiplayer'] = "NIE";
+            }else{
+                $row['multiplayer'] = "TAK";
+            }
+            $string = $string . '<tr><td>'.$row['nazwa'].'</td><td>'.$row['ocena'].'</td><td>'.$row['opis'].'</td><td>'.$row['multiplayer'].'</td></tr>';
+        }
+        $string = $string . '</table>';
+        return $string;
+    }
+
     function searchKategorie(){
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -177,6 +203,8 @@ class baza extends controller
         $string = $string . '</table>';
         return $string;
     }
+
+
 
     function searchFunc(){
         $flag =0;

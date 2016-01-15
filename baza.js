@@ -178,6 +178,20 @@ function searchPlat(){
 
 }
 
+
+function searchOcena(){
+    var szukane = document.getElementById("name").value;
+    var json_data = "{\"nazwa\":\"" + szukane + "\"}";
+    var msg = "data=" + encodeURIComponent(json_data);
+    var url = "index.php?sub=baza&action=searchOceny";
+    resp = function (response) {
+        document.getElementById("response").innerHTML = response;
+    }
+    console.log(resp);
+    xmlhttpPost(url, msg, resp);
+
+}
+
 function xmlhttpPost(strURL, mess, respFunc) {
     var self = this;
     // Mozilla/Safari
