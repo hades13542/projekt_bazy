@@ -96,7 +96,66 @@ class baza extends controller
         $this->layout->content = $this->view;
         return $this->layout;
     }
+    //PANEL ADMINA
+
+    function admin(){
+        $this->layout->header = 'Panel admina';
+        $this->view = new view('admin');
+        $this->layout->content = $this->view;
+        return $this->layout;
+    }
+//usuwanie
+
+    function deleteGra(){
+        $this->layout->header = 'Usuwanie gry po tytule';
+        $this->view = new view('deleteGra');
+        $this->layout->content = $this->view;
+        return $this->layout;
+    }
+
+    function deleteKategoria(){
+        $this->layout->header = 'Usuwanie ketegorii';
+        $this->view = new view('deleteKategoria');
+        $this->layout->content = $this->view;
+        return $this->layout;
+    }
+
+    function deletePlatforma(){
+        $this->layout->header = 'Usuwanie platformy';
+        $this->view = new view('deletePlatforma');
+        $this->layout->content = $this->view;
+        return $this->layout;
+    }
+
+    function deleteGry(){
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa)){
+            $response = $this->model->deleteGry($obj);
+        }
+        return ($response ?  "Usunięto pomyślnie" : "Podany rekord nie istnieje lub zerwano połączenie z bazą.");
+    }
+
+    function deleteKat(){
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa)){
+            $response = $this->model->deleteKat($obj);
+        }
+        return ($response ?  "Usunięto pomyślnie" : "Podany rekord nie istnieje lub zerwano połączenie z bazą.");
+    }
+
+    function deletePlat(){
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa)){
+            $response = $this->model->deletePlat($obj);
+        }
+        return ($response ? "Usunięto pomyślnie" : "Podany rekord nie istnieje lub zerwano połączenie z bazą.");
+    }
+
     //obsluga po kliknieciu
+
 
     function saveKategorie(){
         $data = $_POST['data'];

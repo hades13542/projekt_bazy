@@ -192,6 +192,45 @@ function searchOcena(){
 
 }
 
+function deleteGra(){
+    var szukane = document.getElementById("name").value;
+    var json_data = "{\"nazwa\":\"" + szukane + "\"}";
+    var msg = "data=" + encodeURIComponent(json_data);
+    var url = "index.php?sub=baza&action=deleteGry";
+    resp = function (response) {
+        document.getElementById("response").innerHTML = response;
+    }
+    console.log(resp);
+    xmlhttpPost(url, msg, resp);
+
+}
+
+function deleteKat(){
+    var szukane = document.getElementById("name").value;
+    var json_data = "{\"nazwa\":\"" + szukane + "\"}";
+    var msg = "data=" + encodeURIComponent(json_data);
+    var url = "index.php?sub=baza&action=deleteKat";
+    resp = function (response) {
+        document.getElementById("response").innerHTML = response;
+    }
+    console.log(resp);
+    xmlhttpPost(url, msg, resp);
+
+}
+
+function deletePlat(){
+    var szukane = document.getElementById("name").value;
+    var json_data = "{\"nazwa\":\"" + szukane + "\"}";
+    var msg = "data=" + encodeURIComponent(json_data);
+    var url = "index.php?sub=baza&action=deletePlat";
+    resp = function (response) {
+        document.getElementById("response").innerHTML = response;
+    }
+    console.log(resp);
+    xmlhttpPost(url, msg, resp);
+
+}
+
 function xmlhttpPost(strURL, mess, respFunc) {
     var self = this;
     // Mozilla/Safari

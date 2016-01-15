@@ -68,7 +68,24 @@ class database
         }
 
     }
+//USUWANIE!
 
+    public function deleteGry($obj){
+        $result = pg_query_params('select delete_gra($1);',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        return $result;
+    }
+
+    public function deleteKat($obj){
+        $result = pg_query_params('select DISTINCT nazwa,ocena,opis,multiplayer from wszystko where ocena > $1 ORDER BY ocena;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        return $result;
+    }
+
+    public function deletePlat($obj){
+        $result = pg_query_params('select DISTINCT nazwa,ocena,opis,multiplayer from wszystko where ocena > $1 ORDER BY ocena;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        return $result;
+    }
+
+//////////////////////////////
     public function search($obj){
 
         $result = pg_query_params('select szukanie.*, gra.idgra from szukanie join gra on gra.nazwa = szukanie.nazwa where szukanie.nazwa = $1;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
