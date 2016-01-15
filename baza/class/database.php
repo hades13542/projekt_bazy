@@ -82,6 +82,12 @@ class database
         return $line;
     }
 
+    public function searchPlat($obj){
+        $result = pg_query_params('SELECT DISTINCT nazwa,ocena FROM wszystko WHERE platforma IS NOT NULL AND platforma LIKE $1 ORDER BY nazwa;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        $line = pg_fetch_all($result);
+        return $line;
+    }
+
     public function ocena_change($obj,$id){
         pg_query("begin");
         $res = pg_query_params("select ocena_change($1,$2);", Array($id,$obj->ocena));

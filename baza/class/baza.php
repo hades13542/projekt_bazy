@@ -157,6 +157,20 @@ class baza extends controller
         return $string;
     }
 
+    function searchPlat(){
+        $data = $_POST['data'];
+        $obj = json_decode($data);
+        if(isset($obj->nazwa)){
+            $response = $this->model->searchPlat($obj);
+        }
+        $string = '<table><tr><td>Nazwa Gry</td><td>Ocena</td>';
+        foreach($response as $row){
+            $string = $string . '<tr><td>'.$row['nazwa'].'</td><td>'.$row['ocena'].'</td></tr>';
+        }
+        $string = $string . '</table>';
+        return $string;
+    }
+
     function searchFunc(){
         $flag =0;
         $string = '<h3>';
@@ -195,7 +209,6 @@ class baza extends controller
             $string = $string . ''.$row['nazwa'].'</h3>Data wydania:&nbsp'.$data.'&nbsp&nbsp&nbsp&nbsp<br>Producent:&nbsp'.$producent.'Wydawca:&nbsp'.$wydawca.'&nbsp&nbsp&nbsp&nbsp Wydawca w Polsce&nbsp'.$wydawca_pl.'<br>Ocena:&nbsp'.$ocena.'&nbsp&nbsp&nbsp&nbspIlosc ocen: '.$ilosc_ocen.'<br>Multiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br>Kategorie: '.$kategoria.'<br>Platformy:'.$platformy.'<br><br>'.$opis.'';
 
         }
-        //TODO: kurwa jak to ogarniac
 	$id = $row['idgra'];
 	setcookie('ID', serialize($id), 0);
         return $string . '<br>';//$row['nazwa'];//$string;//$response->nazwa;//print_r($response);
