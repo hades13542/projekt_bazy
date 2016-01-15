@@ -76,12 +76,12 @@ class database
     }
 
     public function deleteKat($obj){
-        $result = pg_query_params('select DISTINCT nazwa,ocena,opis,multiplayer from wszystko where ocena > $1 ORDER BY ocena;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        $result = pg_query_params('DELETE FROM kategoria WHERE nazwa=$1;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
         return $result;
     }
 
     public function deletePlat($obj){
-        $result = pg_query_params('select DISTINCT nazwa,ocena,opis,multiplayer from wszystko where ocena > $1 ORDER BY ocena;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        $result = pg_query_params('DELETE FROM platforma WHERE nazwa = $1;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
         return $result;
     }
 
