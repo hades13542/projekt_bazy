@@ -170,7 +170,7 @@ class baza extends controller
             }else{
                 $row['multiplayer'] = "TAK";
             }
-            $string = $string . '<tr><td>'.$row['nazwa'].'</td><td>'.$row['ocena'].'</td><td>'.$row['opis'].'</td><td>'.$row['multiplayer'].'</td></tr>';
+            $string = $string . '<tr><td>'.$row['nazwa'].'</td><td>'.round($row['ocena'],2).'</td><td>'.$row['opis'].'</td><td>'.$row['multiplayer'].'</td></tr>';
         }
         $string = $string . '</table>';
         return $string;
@@ -184,7 +184,7 @@ class baza extends controller
         }
         $string = '<table><tr><td>Nazwa Gry</td><td>Ocena</td>';
         foreach($response as $row){
-            $string = $string . '<tr><td>'.$row['nazwa_gry'].'</td><td>'.$row['ocena'].'</td></tr>';
+            $string = $string . '<tr><td>'.$row['nazwa_gry'].'</td><td>'.round($row['ocena'],2).'</td></tr>';
         }
 	$string = $string . '</table>';
         return $string;
@@ -198,7 +198,7 @@ class baza extends controller
         }
         $string = '<table><tr><td>Nazwa Gry</td><td>Ocena</td>';
         foreach($response as $row){
-            $string = $string . '<tr><td>'.$row['nazwa'].'</td><td>'.$row['ocena'].'</td></tr>';
+            $string = $string . '<tr><td>'.$row['nazwa'].'</td><td>'.round($row['ocena'],2).'</td></tr>';
         }
         $string = $string . '</table>';
         return $string;
@@ -241,7 +241,7 @@ class baza extends controller
             }else{
                 $row['multiplayer'] = "TAK";
             }
-            $string = $string . ''.$row['nazwa'].'</h3>Data wydania:&nbsp'.$data.'&nbsp&nbsp&nbsp&nbsp<br>Producent:&nbsp'.$producent.'Wydawca:&nbsp'.$wydawca.'&nbsp&nbsp&nbsp&nbsp Wydawca w Polsce&nbsp'.$wydawca_pl.'<br>Ocena:&nbsp'.$ocena.'&nbsp&nbsp&nbsp&nbspIlosc ocen: '.$ilosc_ocen.'<br>Multiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br>Kategorie: '.$kategoria.'<br>Platformy:'.$platformy.'<br><br>'.$opis.'';
+            $string = $string . ''.$row['nazwa'].'</h3>Data wydania:&nbsp'.$data.'&nbsp&nbsp&nbsp&nbsp<br>Producent:&nbsp'.$producent.'Wydawca:&nbsp'.$wydawca.'&nbsp&nbsp&nbsp&nbsp Wydawca w Polsce&nbsp'.$wydawca_pl.'<br>Ocena:&nbsp'.round($ocena,2).'&nbsp&nbsp&nbsp&nbspIlosc ocen: '.$ilosc_ocen.'<br>Multiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br>Kategorie: '.$kategoria.'<br>Platformy:'.$platformy.'<br><br>'.$opis.'';
 
         }
 	$id = $row['idgra'];

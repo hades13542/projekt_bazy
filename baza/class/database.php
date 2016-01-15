@@ -89,7 +89,7 @@ class database
     }
 
     public function searchOceny($obj){
-        $result = pg_query_params('select nazwa,ocena,opis,multiplayer from wszystko where ocena > $1 ORDER BY ocena;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        $result = pg_query_params('select DISTINCT nazwa,ocena,opis,multiplayer from wszystko where ocena > $1 ORDER BY ocena;',Array($obj->nazwa)) or die('Nieprawidlowe zapytanie '. pg_last_error());
         $line = pg_fetch_all($result);
         return $line;
     }
