@@ -9,9 +9,18 @@
 
 class baza extends controller
 {
+    /**
+     * @var view
+     */
     protected $layout ;
+    /**
+     * @var database
+     */
     protected $model ;
     //public $id;
+    /**
+     * baza constructor.
+     */
     function __construct()
     {
         parent::__construct();
@@ -22,6 +31,9 @@ class baza extends controller
         $this->layout->title  = 'Encyklopedia Gier Komputerowych' ;
     }
 
+    /**
+     * @return view
+     */
     function listAll() {
         $this->layout->header = 'Lista wszystkich rekordow' ;
         $this->view = new view('listall') ;
@@ -30,6 +42,9 @@ class baza extends controller
         return $this->layout ;
     }
 
+    /**
+     * @return view
+     */
     function search(){
         $this->layout->header = 'Wyszukaj rekord który znajduje się w bazie (brak odpowiedzi oznacza nie istniejący rekord/błędne zapytanie)' ;
         $this->view = new view('search') ;
@@ -37,6 +52,9 @@ class baza extends controller
         return $this->layout ;
     }
 
+    /**
+     * @return view
+     */
     function searchKat(){
         $this->layout->header = 'Wyszukaj gry z danej kategorii' ;
         $this->view = new view('searchKat') ;
@@ -44,6 +62,9 @@ class baza extends controller
         return $this->layout ;
     }
 
+    /**
+     * @return view
+     */
     function searchPlat(){
         $this->layout->header = 'Wyszukaj gry na daną platformę' ;
         $this->view = new view('searchPlat') ;
@@ -51,6 +72,9 @@ class baza extends controller
         return $this->layout ;
     }
 
+    /**
+     * @return view
+     */
     function searchOcena(){
         $this->layout->header = 'Wyszukaj gry o ocenie wyższej niż podana' ;
         $this->view = new view('searchOcena') ;
@@ -58,6 +82,9 @@ class baza extends controller
         return $this->layout ;
     }
 
+    /**
+     * @return view
+     */
     function insertRec(){
         $this->layout->header = 'Wprowadzanie do bazy';
         $this->view = new view('insert');
@@ -66,6 +93,9 @@ class baza extends controller
         return $this->layout;
     }
 
+    /**
+     * @return view
+     */
     function insertSimple(){
         $this->layout->header = 'Podaj podstawowe dane o grze i swoją ocenę';
         $this->view = new view('simpleForm');
@@ -74,6 +104,9 @@ class baza extends controller
         return $this->layout;
     }
 
+    /**
+     * @return view
+     */
     function insertKategorie(){
         $this->layout->header = 'Dodaj kategorię której nie ma w bazie';
         $this->view = new view('kategorieForm');
@@ -81,6 +114,9 @@ class baza extends controller
         return $this->layout;
     }
 
+    /**
+     * @return view
+     */
     function insertAdvanced(){
         $this->layout->header = 'Dodaj informację o grze do bazy';
         $this->view = new view('advancedForm');
@@ -90,6 +126,9 @@ class baza extends controller
         return $this->layout;
     }
 
+    /**
+     * @return view
+     */
     function insertPlatformy(){
         $this->layout->header = 'Dodaj nową platformę do bazy';
         $this->view = new view('platformyForm');
@@ -98,6 +137,9 @@ class baza extends controller
     }
     //PANEL ADMINA
 
+    /**
+     * @return view
+     */
     function admin(){
         $this->layout->header = 'Panel admina';
         $this->view = new view('admin');
@@ -106,6 +148,9 @@ class baza extends controller
     }
 //usuwanie
 
+    /**
+     * @return view
+     */
     function deleteGra(){
         $this->layout->header = 'Usuwanie gry po tytule';
         $this->view = new view('deleteGra');
@@ -113,6 +158,9 @@ class baza extends controller
         return $this->layout;
     }
 
+    /**
+     * @return view
+     */
     function deleteKategoria(){
         $this->layout->header = 'Usuwanie ketegorii';
         $this->view = new view('deleteKategoria');
@@ -120,6 +168,9 @@ class baza extends controller
         return $this->layout;
     }
 
+    /**
+     * @return view
+     */
     function deletePlatforma(){
         $this->layout->header = 'Usuwanie platformy';
         $this->view = new view('deletePlatforma');
@@ -127,6 +178,9 @@ class baza extends controller
         return $this->layout;
     }
 
+    /**
+     * @return string
+     */
     function deleteGry(){
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -136,6 +190,9 @@ class baza extends controller
         return ($response ?  "Usunięto pomyślnie" : "Podany rekord nie istnieje lub zerwano połączenie z bazą.");
     }
 
+    /**
+     * @return string
+     */
     function deleteKat(){
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -145,6 +202,9 @@ class baza extends controller
         return ($response ?  "Usunięto pomyślnie" : "Podany rekord nie istnieje lub zerwano połączenie z bazą.");
     }
 
+    /**
+     * @return string
+     */
     function deletePlat(){
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -157,6 +217,9 @@ class baza extends controller
     //obsluga po kliknieciu
 
 
+    /**
+     * @return string
+     */
     function saveKategorie(){
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -166,6 +229,9 @@ class baza extends controller
         return ($response ? "Dodano rekord" : "Podany rekord już istnieje lub zerwano połączenie z bazą. Spróbuj ponownie.");
     }
 
+    /**
+     * @return string
+     */
     function ocena_change(){
 	if (isset($_COOKIE['ID'])) {
   	$id = unserialize($_COOKIE['ID']);
@@ -180,6 +246,9 @@ class baza extends controller
         return ($response ? "Dodano ocenę" : "Ocenianie nie powiodło się");
     }
 
+    /**
+     * @return string
+     */
     function saveSimple(){
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -189,6 +258,9 @@ class baza extends controller
         return ($response ? "Dodano rekord" : "Podano błędne wartości lub zerwano połączenie z bazą. Spróbuj ponownie.");
     }
 
+    /**
+     * @return string
+     */
     function saveAdvanced(){
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -198,6 +270,9 @@ class baza extends controller
         return ($response) ? "Dodano rekord" : "Podano błędne wartości lub zerwano połączenie z bazą. Spróbuj ponownie.";
     }
 
+    /**
+     * @return string
+     */
     function savePlatformy(){
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -207,6 +282,9 @@ class baza extends controller
         return ($response) ? "Dodano rekord" : "Podano błędne wartości lub zerwano połączenie z bazą. Spróbuj ponownie.";
     }
 
+    /**
+     * @return string
+     */
     function saveRec() {
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -216,6 +294,9 @@ class baza extends controller
         return ($response ? "Dodano rekord" : "ERROR!");
     }
 
+    /**
+     * @return string
+     */
     function searchOceny(){
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -235,6 +316,9 @@ class baza extends controller
         return $string;
     }
 
+    /**
+     * @return string
+     */
     function searchKategorie(){
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -249,6 +333,9 @@ class baza extends controller
         return $string;
     }
 
+    /**
+     * @return string
+     */
     function searchPlatformy(){
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -264,7 +351,9 @@ class baza extends controller
     }
 
 
-
+    /**
+     * @return string
+     */
     function searchFunc(){
         $flag =0;
         $string = '<h3>';

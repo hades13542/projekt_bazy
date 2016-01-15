@@ -1,6 +1,9 @@
 <?php
 
 try {
+    /**
+     * @param $class_name
+     */
     function __autoload($class_name) {
         if       ( file_exists($path = 'baza/class/'.$class_name.'.php')) {
             include 'baza/class/'.$class_name.'.php' ;
