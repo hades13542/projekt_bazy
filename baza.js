@@ -165,11 +165,11 @@ function searchKat(){
 }
 
 
-function searchKat(){
+function searchPlat(){
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";
     var msg = "data=" + encodeURIComponent(json_data);
-    var url = "index.php?sub=baza&action=searchPlat";
+    var url = "index.php?sub=baza&action=searchPlatformy";
     resp = function (response) {
         document.getElementById("response").innerHTML = response;
     }
