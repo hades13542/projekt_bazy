@@ -60,7 +60,8 @@ class database
  	pg_query("commit");
             return $res;
         }else{
-            pg_query("rollback;");
+            pg_query("rollback");
+            return pg_last_error();
         }
     }
 

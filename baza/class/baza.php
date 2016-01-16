@@ -314,7 +314,7 @@ class baza extends controller
         }
         $string = '<table border="1"><tr><td>Nazwa Gry</td><td>Ocena</td><td>Opis Gry</td><td>Multiplayer</td>';
         foreach($response as $row){
-            if ($row['multiplayer'] == f){
+            if ($row['multiplayer'] == 'f'){
                 $row['multiplayer'] = "NIE";
             }else{
                 $row['multiplayer'] = "TAK";
@@ -364,7 +364,6 @@ class baza extends controller
      * @return string
      */
     function searchFunc(){
-        $flag =0;
         $string = '<h3>';
         $data = $_POST['data'];
         $obj = json_decode($data);
@@ -398,7 +397,7 @@ class baza extends controller
             }else{
                 $row['multiplayer'] = "TAK";
             }
-            $string = $string . ''.$row['nazwa'].'</h3>Data wydania:&nbsp'.$data.'&nbsp&nbsp&nbsp&nbsp<br>Producent:&nbsp'.$producent.'Wydawca:&nbsp'.$wydawca.'&nbsp&nbsp&nbsp&nbsp Wydawca w Polsce&nbsp'.$wydawca_pl.'<br>Ocena:&nbsp'.round($ocena,2).'&nbsp&nbsp&nbsp&nbspIlosc ocen: '.$ilosc_ocen.'<br>Multiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br>Kategorie: '.$kategoria.'<br>Platformy:'.$platformy.'<br><br>'.$opis.'';
+            $string = $string . ''.$nazwa.'</h3>Data wydania:&nbsp'.$data.'&nbsp&nbsp&nbsp&nbsp<br>Producent:&nbsp'.$producent.'Wydawca:&nbsp'.$wydawca.'&nbsp&nbsp&nbsp&nbsp Wydawca w Polsce&nbsp'.$wydawca_pl.'<br>Ocena:&nbsp'.round($ocena,2).'&nbsp&nbsp&nbsp&nbspIlosc ocen: '.$ilosc_ocen.'<br>Multiplayer:&nbsp&nbsp'.$row['multiplayer'].'<br>Kategorie: '.$kategoria.'<br>Platformy:'.$platformy.'<br><br>'.$opis.'';
 
         }
 	$id = $row['idgra'];

@@ -1,19 +1,6 @@
 /**
  * Created by atar1x on 05.01.16.
  */
-function fn_save() {
-    var fname = document.getElementById("idtable_01").value;
-    var lname = document.getElementById("name").value;
-    document.getElementById("data").style.display = "none";
-    var json_data = "{\"idtable_01\":\"" + fname + "\",\"name\":\"" + lname + "\"}";
-    var msg = "data=" + encodeURIComponent(json_data);
-    var url = "index.php?sub=baza&action=saveRec";
-    resp = function (response) {
-        // alert ( response ) ;
-        document.getElementById("response").innerHTML = response;
-    }
-    xmlhttpPost(url,msg,resp);
-}
 //Zapisywanie do prostego dodawania
 function fn_saveSimple(){
     var nazwa = document.getElementById("nazwa").value;
