@@ -1,17 +1,23 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: atar1x
- * Date: 04.01.16
- * Time: 20:42
- */
 
+/**
+ * Class info dziedziczy po controller
+ */
 class info extends controller {
 
+    /**
+     * @var view do obsługi wyglądu
+     */
     protected $layout ;
+    /**
+     * @var
+     */
     protected $model ;
 
+    /**
+     * info constructor inicjalizuje stronę
+     */
     function __construct() {
         parent::__construct() ;
         $this->layout = new view('main') ;
@@ -20,22 +26,33 @@ class info extends controller {
         $this->layout->title = "Encyklopedia Gier Komputerowych" ;
     }
 
+    /**
+     * Inicjalizuje stronę glówną i wyświetla statystykę z bazy danych
+     * @return view
+     */
     function index() {
-        $this->layout->header  = 'Dziala index' ;
-        $this->layout->content = 'Index kontent';//'<a href=\'database.php\'>Odczyt z bazy danych</a><br><a href=\'zapis.php\'>Zapis do bazy danych</a>' ;
+        $temp=new baza();
+        $this->layout->header  = 'Witaj!' ;
+        $this->layout->content = $temp->statystyka();
         return $this->layout ;
     }
 
+    /**
+     * Zmienia widok strony na stronę z linkiem do dokumentacji
+     * @return view
+     */
     function help() {
         $this->model = new model();
-        $this->layout->header  = 'Simple MVC' ;
-        $this->view = new view('table') ;
-        $this->view->data = $this->model->getTable() ;
+        $this->layout->header  = 'Zbiór informacji o projekcie' ;
         $this->layout->content = $this->view ;
         return $this->layout ;
     }
 
 
+    /**
+     * Funkcja testowa, nie ma zastosowania w projekcie
+     * @return view
+     */
     function test(){
         $this->model = new model();
         $this->layout->header = "TESt";

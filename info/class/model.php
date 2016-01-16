@@ -1,22 +1,27 @@
 <?php
 
+
 /**
- * Created by PhpStorm.
- * User: atar1x
- * Date: 04.01.16
- * Time: 20:37
+ * Class model używana do testów
  */
 class model
 {
+    /**
+     * @var array tablica używana do testów
+     */
     private $table = array();
 
+    /**
+     * model constructor.
+     */
     function __construct()
     {
-        $this->table['main'] = 'index.php';
-        $this->table['info'] = 'zawiera rzeczy z katalogu info';
-        $this->table['baza'] = 'zawiera rzeczy zwiazane z bazą';
     }
 
+    /**
+     * Funkcja pobierajaca zawartosc tablicy (testowa)
+     * @return array
+     */
     public function getTable()
     {
         return $this->table;

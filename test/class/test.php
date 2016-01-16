@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class test używana do testów
+ */
 class test extends controller {
 
     protected $layout ;
@@ -17,6 +20,7 @@ class test extends controller {
     }
 
     /**
+     * Funkcja testowa, nie ma zastosowania w projekcie
      * @return view
      */
     function index() {

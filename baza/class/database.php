@@ -202,6 +202,13 @@ class database
         return $res;
     }
 
+    public function getStatystyki(){
+        $this->sql = "select * from statystyka;";
+        $result = pg_query($this->sql) or die('Nieprawidlowe zapytanie '. pg_last_error());
+        $line = pg_fetch_all($result);
+        return $line;
+    }
+
     /**
      * @return array
      */

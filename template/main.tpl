@@ -15,6 +15,6 @@
     <header><?php echo $header ; ?></header>
     <article><?php echo $content ; ?></article>
 </section>
-<footer>Dawid Hujdus © 2016 </footer>
+<!--footer>Dawid Hujdus © 2016 </--footer-->
 </body>
 </html>

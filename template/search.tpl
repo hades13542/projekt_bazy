@@ -9,12 +9,6 @@
 <p id="response"></p>
 <?php
 
-
-//foreach ($odpowiedz as $row) {
-//    foreach($row as $tekst)
-//    echo $tekst;
-//    echo '<br>';
- //   }
 ?>
 <div id="ocena_div">
     <form>

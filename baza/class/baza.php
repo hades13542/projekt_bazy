@@ -42,6 +42,15 @@ class baza extends controller
         return $this->layout ;
     }
 
+    function statystyka(){
+        $string = "Witaj w encyklopedii gier komputerowych, wybierz interesującą Cię funkcję z menu po lewej.<br><br><br><br>Obecnie w naszej bazie znajduje się: ";
+        $response = $this->model->getStatystyki();
+        foreach($response as $row){
+            $string = $string .$row['ilosc_gier'].' gier podzielonych na '. $row['ilosc_kategorii'] .' kategorii oraz '.$row['ilosc_platform']. ' platform<br>Wystawiono ' .$row['ilosc_ocen'].' oceny co daje średnio '.round($row['srednia'],2).' na grę!<br>';
+        }
+
+        return $string ;
+    }
     /**
      * @return view
      */
@@ -303,7 +312,7 @@ class baza extends controller
         if(isset($obj->nazwa)){
             $response = $this->model->searchOceny($obj);
         }
-        $string = '<table><tr><td>Nazwa Gry</td><td>Ocena</td><td>Opis Gry</td><td>Multiplayer</td>';
+        $string = '<table border="1"><tr><td>Nazwa Gry</td><td>Ocena</td><td>Opis Gry</td><td>Multiplayer</td>';
         foreach($response as $row){
             if ($row['multiplayer'] == f){
                 $row['multiplayer'] = "NIE";
@@ -325,7 +334,7 @@ class baza extends controller
         if(isset($obj->nazwa)){
             $response = $this->model->searchKategorie($obj);
         }
-        $string = '<table><tr><td>Nazwa Gry</td><td>Ocena</td>';
+        $string = '<table border="1"><tr><td>Nazwa Gry</td><td>Ocena</td>';
         foreach($response as $row){
             $string = $string . '<tr><td>'.$row['nazwa_gry'].'</td><td>'.round($row['ocena'],2).'</td></tr>';
         }
@@ -342,7 +351,7 @@ class baza extends controller
         if(isset($obj->nazwa)){
             $response = $this->model->searchPlatformy($obj);
         }
-        $string = '<table><tr><td>Nazwa Gry</td><td>Ocena</td>';
+        $string = '<table border="1"><tr><td>Nazwa Gry</td><td>Ocena</td>';
         foreach($response as $row){
             $string = $string . '<tr><td>'.$row['nazwa'].'</td><td>'.round($row['ocena'],2).'</td></tr>';
         }
