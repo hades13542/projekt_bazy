@@ -1,0 +1,31 @@
+<?php
+
+
+/**
+ * Class model używana do testów
+ */
+class model
+{
+    /**
+     * @var array tablica używana do testów
+     */
+    private $table = array();
+
+    /**
+     * model constructor.
+     */
+    function __construct()
+    {
+    }
+
+    /**
+     * Funkcja pobierajaca zawartosc tablicy (testowa)
+     * @return array
+     */
+    public function getTable()
+    {
+        return $this->table;
+    }
+}
+
+

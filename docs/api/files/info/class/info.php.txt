@@ -1,0 +1,65 @@
+<?php
+
+
+/**
+ * Class info dziedziczy po controller
+ */
+class info extends controller {
+
+    /**
+     * @var view do obsługi wyglądu
+     */
+    protected $layout ;
+    /**
+     * @var
+     */
+    protected $model ;
+
+    /**
+     * info constructor inicjalizuje stronę
+     */
+    function __construct() {
+        parent::__construct() ;
+        $this->layout = new view('main') ;
+        $this->layout->css = $this->css ;
+        $this->layout->menu = $this->menu ;
+        $this->layout->title = "Encyklopedia Gier Komputerowych" ;
+    }
+
+    /**
+     * Inicjalizuje stronę glówną i wyświetla statystykę z bazy danych
+     * @return view
+     */
+    function index() {
+        $temp=new baza();
+        $this->layout->header  = 'Witaj!' ;
+        $this->layout->content = $temp->statystyka();
+        return $this->layout ;
+    }
+
+    /**
+     * Zmienia widok strony na stronę z linkiem do dokumentacji
+     * @return view
+     */
+    function help() {
+        $this->model = new model();
+        $this->view = new view('table');
+        $this->layout->header  = 'Zbiór informacji o projekcie' ;
+        $this->layout->content = $this->view ;
+        return $this->layout ;
+    }
+
+
+    /**
+     * Funkcja testowa, nie ma zastosowania w projekcie
+     * @return view
+     */
+    function test(){
+        $this->model = new model();
+        $this->layout->header = "TESt";
+        return $this->layout;
+    }
+
+}
+
+

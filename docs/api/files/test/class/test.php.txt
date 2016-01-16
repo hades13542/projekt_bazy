@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Class test używana do testów
+ */
+class test extends controller {
+
+    protected $layout ;
+
+    /**
+     * test constructor.
+     */
+    function __construct() {
+        parent::__construct() ;
+        $this->layout = new view('main') ;
+        $this->layout->css = $this->css ;
+        $this->layout->menu = $this->menu ;
+        $this->layout->title = "Encyklopedia Gier Komputerowych";
+        $this->layout->content = 'Jakikolwiek kontant';
+    }
+
+    /**
+     * Funkcja testowa, nie ma zastosowania w projekcie
+     * @return view
+     */
+    function index() {
+        return $this->layout ;
+    }
+}
+

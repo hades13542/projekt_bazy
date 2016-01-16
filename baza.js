@@ -154,7 +154,7 @@ function searchKat(){
     xmlhttpPost(url, msg, resp);
 
 }
-//Wyszukiwanie wg Platformy
+//Wyszukiwanie wg Platformy!
 function searchPlat(){
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";
