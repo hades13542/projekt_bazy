@@ -1,12 +1,9 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: atar1x
- * Date: 05.01.16
- * Time: 00:13
- */
 
+/**
+ * Class database zarzadzająca wszelakimi operacjami w bazie
+ */
 class database
 {
     /**
@@ -202,6 +199,9 @@ class database
         return $res;
     }
 
+    /**
+     * @return array
+     */
     public function getStatystyki(){
         $this->sql = "select * from statystyka;";
         $result = pg_query($this->sql) or die('Nieprawidlowe zapytanie '. pg_last_error());
