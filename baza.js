@@ -1,6 +1,10 @@
 /**
  * Created by atar1x on 05.01.16.
  */
+
+//Wszystkie funkcje służą do komunikacji pomiędzy Widokiem a bazą.
+//90% z nich to dokładnie to samo, różnią się tylko danymi przekazanymi z formularza (jako JSON)
+
 //Zapisywanie do prostego dodawania
 function fn_saveSimple(){
     var nazwa = document.getElementById("nazwa").value;
@@ -27,8 +31,7 @@ function fn_saveSimple(){
 
     }
 }
-
-
+//Zapisywanie do platformy
 function fn_savePlatformy(){
     var nazwa = document.getElementById("nazwa").value;
     var producent = document.getElementById("producent").value;
@@ -43,7 +46,7 @@ function fn_savePlatformy(){
     xmlhttpPost(url, msg, resp);
 	document.getElementById("kolejny").style.display = "block";
 }
-
+//Zapisywanie do zaawansowanego dodawania
 function fn_saveAdvanced(){
     var array1 = [];
     var array2 = [];
@@ -84,7 +87,7 @@ function fn_saveAdvanced(){
 
     }
 }
-//zapisywanie kategorii
+//Zapisywanie do kategorii
 function fn_saveKategorie(){
     var kategoria = document.getElementById("kategoria").value;
         var json_data = "{\"nazwa\":\"" + kategoria + "\"}";
@@ -98,10 +101,11 @@ function fn_saveKategorie(){
         xmlhttpPost(url, msg, resp);
         document.getElementById("kolejny").style.display = "block";
     }
-
+//Wyswietlanie przycisku "DODAJ KOLEJNY"
 function handleButtonKolejny(){
     location.reload();
 }
+//Funkcja sprawdzająca czy ocena jest z zakresu 0-10
 function checkSimple(ocena){
 
     var is_ocena = /[1-9]|10/;
@@ -111,7 +115,7 @@ function checkSimple(ocena){
     }
     return flag;
 }
-
+//Funkcja obslugujaca zmianę oceny
 function ocena_change(){
     var ocena = document.getElementById("ocena").value;
     var json_data = "{\"ocena\":\"" + ocena + "\"}";
@@ -123,7 +127,7 @@ function ocena_change(){
     console.log(resp);
     xmlhttpPost(url, msg, resp);
 }
-
+//Wyszukiwanie gry w bazie
 function search(){
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";
@@ -137,7 +141,7 @@ function search(){
     document.getElementById("ocena_div").style.display = "block";
     document.getElementById("szukaj").style.display = "none";
 }
-
+//Wyszukiwanie wg kategorii
 function searchKat(){
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";
@@ -150,8 +154,7 @@ function searchKat(){
     xmlhttpPost(url, msg, resp);
 
 }
-
-
+//Wyszukiwanie wg Platformy
 function searchPlat(){
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";
@@ -164,8 +167,7 @@ function searchPlat(){
     xmlhttpPost(url, msg, resp);
 
 }
-
-
+//Wyszukiwanie wg Oceny
 function searchOcena(){
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";
@@ -178,7 +180,7 @@ function searchOcena(){
     xmlhttpPost(url, msg, resp);
 
 }
-
+//Usuwanie gry z bazy
 function deleteGra(){
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";
@@ -191,7 +193,7 @@ function deleteGra(){
     xmlhttpPost(url, msg, resp);
 
 }
-
+//Usuwanie kategorii z bazy
 function deleteKat(){
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";
@@ -204,7 +206,7 @@ function deleteKat(){
     xmlhttpPost(url, msg, resp);
 
 }
-
+//Usuwanie platformy z bazy
 function deletePlat(){
     var szukane = document.getElementById("name").value;
     var json_data = "{\"nazwa\":\"" + szukane + "\"}";
@@ -217,7 +219,7 @@ function deletePlat(){
     xmlhttpPost(url, msg, resp);
 
 }
-
+//Funkcja do obsługi metody POST
 function xmlhttpPost(strURL, mess, respFunc) {
     var self = this;
     // Mozilla/Safari
@@ -244,4 +246,3 @@ function xmlhttpPost(strURL, mess, respFunc) {
     self.xmlHttpReq.setRequestHeader("Content-length", mess.length);
     self.xmlHttpReq.send(mess);
 }
-

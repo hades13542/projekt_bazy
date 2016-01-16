@@ -1,25 +1,22 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: atar1x
- * Date: 05.01.16
- * Time: 00:41
- */
 
+/**
+ * Class baza służy o obsługi pomiędzy bazą danych a interfejsem
+ */
 class baza extends controller
 {
     /**
-     * @var view
+     * @var view przechowuje aktualny widok
      */
     protected $layout ;
     /**
-     * @var database
+     * @var database przechowuje bazę
      */
     protected $model ;
-    //public $id;
+
     /**
-     * baza constructor.
+     * baza constructor inicjalizuje główny widok
      */
     function __construct()
     {
@@ -32,6 +29,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja zmienia widok na listę wszystkich gier w bazie
      * @return view
      */
     function listAll() {
@@ -42,6 +40,10 @@ class baza extends controller
         return $this->layout ;
     }
 
+    /**
+     * Funkcja zwraca tekst zawierający wszystkie statystyki z bazy danych
+     * @return string
+     */
     function statystyka(){
         $string = "Witaj w encyklopedii gier komputerowych, wybierz interesującą Cię funkcję z menu po lewej.<br><br><br><br>Obecnie w naszej bazie znajduje się: ";
         $response = $this->model->getStatystyki();
@@ -52,6 +54,7 @@ class baza extends controller
         return $string ;
     }
     /**
+     * Funkcja Zmienia widok na opis wyszukanej przez nas gry
      * @return view
      */
     function search(){
@@ -62,6 +65,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja zmienia widok na wyszukiwanie wg kategorii
      * @return view
      */
     function searchKat(){
@@ -72,6 +76,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja zmienia widok na wyszikiwanie wg platformy
      * @return view
      */
     function searchPlat(){
@@ -82,6 +87,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja zmienia widok na wyszukiwanie wg oceny
      * @return view
      */
     function searchOcena(){
@@ -92,6 +98,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja testowa, zmienia widok na wprowadzanie do bazy
      * @return view
      */
     function insertRec(){
@@ -103,17 +110,18 @@ class baza extends controller
     }
 
     /**
+     * Funkcja zmieniajaca widok na arkusz dodawania do bazy(prosty)
      * @return view
      */
     function insertSimple(){
         $this->layout->header = 'Podaj podstawowe dane o grze i swoją ocenę';
         $this->view = new view('simpleForm');
-        //$this->view = new view('form');
         $this->layout->content = $this->view;
         return $this->layout;
     }
 
     /**
+     * Funkcja zmieniajaca widok na arkusz dodawania kategorii
      * @return view
      */
     function insertKategorie(){
@@ -124,6 +132,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja zmieniajaca widok na arkusz dodawania do bazy(zaawansowany)
      * @return view
      */
     function insertAdvanced(){
@@ -136,6 +145,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja zmieniajaca widok na arkusz dodawania platformy
      * @return view
      */
     function insertPlatformy(){
@@ -144,9 +154,10 @@ class baza extends controller
         $this->layout->content = $this->view;
         return $this->layout;
     }
-    //PANEL ADMINA
+
 
     /**
+     * Funkcja zmieniajaca widok na panel admina
      * @return view
      */
     function admin(){
@@ -155,9 +166,9 @@ class baza extends controller
         $this->layout->content = $this->view;
         return $this->layout;
     }
-//usuwanie
 
     /**
+     * Funkcja zmieniajaca widok na arkusz usuwania gry z bazy
      * @return view
      */
     function deleteGra(){
@@ -168,6 +179,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja zmieniajaca widok na arkusz usuwania kategorii z bazy
      * @return view
      */
     function deleteKategoria(){
@@ -178,6 +190,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja zmieniajaca widok na arkusz usuwania platformy z bazy
      * @return view
      */
     function deletePlatforma(){
@@ -188,6 +201,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja obsługująca usuwanie gry z bazy danych
      * @return string
      */
     function deleteGry(){
@@ -200,6 +214,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja obsługująca usuwanie kategorii z bazy danych
      * @return string
      */
     function deleteKat(){
@@ -212,6 +227,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja obsługująca usuwanie platformy z bazy danych
      * @return string
      */
     function deletePlat(){
@@ -223,10 +239,10 @@ class baza extends controller
         return ($response ? "Usunięto pomyślnie" : "Podany rekord nie istnieje lub zerwano połączenie z bazą.");
     }
 
-    //obsluga po kliknieciu
 
 
     /**
+     * Funkcja obsługująca dodawanie Kategorii do bazy danych
      * @return string
      */
     function saveKategorie(){
@@ -239,6 +255,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja obsługująca dodawanie nowej oceny dla wyszukanej funkcji (korzysta z ciasteczek).
      * @return string
      */
     function ocena_change(){
@@ -256,6 +273,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja obsługująca dodawanie(proste) gry do bazy danych
      * @return string
      */
     function saveSimple(){
@@ -268,6 +286,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja obsługująca dodawanie(zaawansowane) gry do bazy danych
      * @return string
      */
     function saveAdvanced(){
@@ -280,6 +299,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja obsługująca dodawanie platformy do bazy danych
      * @return string
      */
     function savePlatformy(){
@@ -292,6 +312,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja TESTOWA! obsługująca dodawanie rekordu do bazy danych
      * @return string
      */
     function saveRec() {
@@ -304,6 +325,7 @@ class baza extends controller
     }
 
     /**
+     * Funkcja obsługująca wyszukiwanie wg oceny, i wyświetlanie wyników.
      * @return string
      */
     function searchOceny(){
@@ -326,6 +348,7 @@ class baza extends controller
     }
 
     /**
+     * * Funkcja obsługująca wyszukiwanie wg Kategorii, i wyświetlanie wyników.
      * @return string
      */
     function searchKategorie(){
@@ -343,6 +366,7 @@ class baza extends controller
     }
 
     /**
+     * * Funkcja obsługująca wyszukiwanie wg Platformy, i wyświetlanie wyników.
      * @return string
      */
     function searchPlatformy(){
@@ -361,6 +385,7 @@ class baza extends controller
 
 
     /**
+     * * Funkcja obsługująca wyszukiwanie gry, i wyświetlanie + formatowanie wyników.
      * @return string
      */
     function searchFunc(){
@@ -402,6 +427,6 @@ class baza extends controller
         }
 	$id = $row['idgra'];
 	setcookie('ID', serialize($id), 0);
-        return $string . '<br>';//$row['nazwa'];//$string;//$response->nazwa;//print_r($response);
+        return $string . '<br>';
     }
 }
