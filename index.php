@@ -2,6 +2,7 @@
 
 try {
     /**
+     * Funkcja inicjalizująca całą stronę i jej obsługę
      * @param $class_name
      */
     function __autoload($class_name) {
@@ -9,8 +10,6 @@ try {
             include 'baza/class/'.$class_name.'.php' ;
         } elseif ( file_exists($path = 'info/class/'.$class_name.'.php')) {
             include 'info/class/'.$class_name.'.php' ;
-        //} elseif ( file_exists($path = 'test/class/'.$class_name.'.php')) {
-        //    include 'test/class/'.$class_name.'.php' ;
         } elseif ( file_exists($path = 'appl/'.$class_name.'.php')) {
             include 'appl/'.$class_name.'.php' ;
         } else {
@@ -23,7 +22,6 @@ try {
     if (empty ($_GET['action'])) { $action     = 'index' ;  }
     else                         { $action     = $_GET['action'] ; }
 
-    // print $contr. ' ' . $action ;
     $controller = new $contr() ;
     echo $controller->$action() ;
 }

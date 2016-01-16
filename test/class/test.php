@@ -16,7 +16,7 @@ class test extends controller {
         $this->layout->css = $this->css ;
         $this->layout->menu = $this->menu ;
         $this->layout->title = "Encyklopedia Gier Komputerowych";
-        $this->layout->content = 'Jakikolwiek kontant';//"<a href='database.php'>Odczyt z bazy danych</a><br><a href='zapis.php'>Zapis do bazy danych</a>";
+        $this->layout->content = 'Jakikolwiek kontant';
     }
 
     /**
