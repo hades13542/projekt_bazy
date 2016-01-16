@@ -43,6 +43,7 @@ class info extends controller {
      */
     function help() {
         $this->model = new model();
+        $this->view = new view('table');
         $this->layout->header  = 'Zbiór informacji o projekcie' ;
         $this->layout->content = $this->view ;
         return $this->layout ;
