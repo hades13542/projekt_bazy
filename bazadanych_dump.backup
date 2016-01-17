@@ -1,0 +1,1818 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.4.5
+-- Dumped by pg_dump version 9.5rc1
+
+-- Started on 2016-01-17 00:40:23
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 202 (class 3079 OID 12157)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 3500 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- TOC entry 201 (class 3079 OID 18054)
+-- Name: plv8; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plv8 WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 3501 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: EXTENSION plv8; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plv8 IS 'PL/JavaScript (v8) trusted procedural language';
+
+
+--
+-- TOC entry 211 (class 3079 OID 17079)
+-- Name: btree_gin; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS btree_gin WITH SCHEMA public;
+
+
+--
+-- TOC entry 3502 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: EXTENSION btree_gin; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION btree_gin IS 'support for indexing common datatypes in GIN';
+
+
+--
+-- TOC entry 207 (class 3079 OID 17513)
+-- Name: btree_gist; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS btree_gist WITH SCHEMA public;
+
+
+--
+-- TOC entry 3503 (class 0 OID 0)
+-- Dependencies: 207
+-- Name: EXTENSION btree_gist; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION btree_gist IS 'support for indexing common datatypes in GiST';
+
+
+--
+-- TOC entry 218 (class 3079 OID 16659)
+-- Name: citext; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
+
+
+--
+-- TOC entry 3504 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: EXTENSION citext; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION citext IS 'data type for case-insensitive character strings';
+
+
+--
+-- TOC entry 209 (class 3079 OID 17426)
+-- Name: cube; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS cube WITH SCHEMA public;
+
+
+--
+-- TOC entry 3505 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: EXTENSION cube; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION cube IS 'data type for multidimensional cubes';
+
+
+--
+-- TOC entry 224 (class 3079 OID 16384)
+-- Name: dblink; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS dblink WITH SCHEMA public;
+
+
+--
+-- TOC entry 3506 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: EXTENSION dblink; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION dblink IS 'connect to other PostgreSQL databases from within a database';
+
+
+--
+-- TOC entry 212 (class 3079 OID 17074)
+-- Name: dict_int; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS dict_int WITH SCHEMA public;
+
+
+--
+-- TOC entry 3507 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: EXTENSION dict_int; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION dict_int IS 'text search dictionary template for integers';
+
+
+--
+-- TOC entry 206 (class 3079 OID 18035)
+-- Name: dict_xsyn; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS dict_xsyn WITH SCHEMA public;
+
+
+--
+-- TOC entry 3508 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: EXTENSION dict_xsyn; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION dict_xsyn IS 'text search dictionary template for extended synonym processing';
+
+
+--
+-- TOC entry 208 (class 3079 OID 17498)
+-- Name: earthdistance; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS earthdistance WITH SCHEMA public;
+
+
+--
+-- TOC entry 3509 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: EXTENSION earthdistance; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION earthdistance IS 'calculate great-circle distances on the surface of the Earth';
+
+
+--
+-- TOC entry 219 (class 3079 OID 16648)
+-- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
+
+
+--
+-- TOC entry 3510 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: EXTENSION fuzzystrmatch; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance between strings';
+
+
+--
+-- TOC entry 213 (class 3079 OID 16951)
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
+
+
+--
+-- TOC entry 3511 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
+
+
+--
+-- TOC entry 214 (class 3079 OID 16840)
+-- Name: intarray; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS intarray WITH SCHEMA public;
+
+
+--
+-- TOC entry 3512 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: EXTENSION intarray; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION intarray IS 'functions, operators, and index support for 1-D arrays of integers';
+
+
+--
+-- TOC entry 222 (class 3079 OID 16444)
+-- Name: ltree; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS ltree WITH SCHEMA public;
+
+
+--
+-- TOC entry 3513 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: EXTENSION ltree; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION ltree IS 'data type for hierarchical tree-like structures';
+
+
+--
+-- TOC entry 204 (class 3079 OID 18047)
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
+
+
+--
+-- TOC entry 3514 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track execution statistics of all SQL statements executed';
+
+
+--
+-- TOC entry 215 (class 3079 OID 16789)
+-- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm WITH SCHEMA public;
+
+
+--
+-- TOC entry 3515 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: EXTENSION pg_trgm; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION pg_trgm IS 'text similarity measurement and index searching based on trigrams';
+
+
+--
+-- TOC entry 216 (class 3079 OID 16754)
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
+
+--
+-- TOC entry 3516 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
+
+
+--
+-- TOC entry 210 (class 3079 OID 17424)
+-- Name: pgrowlocks; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS pgrowlocks WITH SCHEMA public;
+
+
+--
+-- TOC entry 3517 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: EXTENSION pgrowlocks; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION pgrowlocks IS 'show row-level locking information';
+
+
+--
+-- TOC entry 221 (class 3079 OID 16619)
+-- Name: pgstattuple; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS pgstattuple WITH SCHEMA public;
+
+
+--
+-- TOC entry 3518 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: EXTENSION pgstattuple; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION pgstattuple IS 'show tuple-level statistics';
+
+
+--
+-- TOC entry 203 (class 3079 OID 1825429)
+-- Name: sslinfo; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS sslinfo WITH SCHEMA public;
+
+
+--
+-- TOC entry 3519 (class 0 OID 0)
+-- Dependencies: 203
+-- Name: EXTENSION sslinfo; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION sslinfo IS 'information about SSL certificates';
+
+
+--
+-- TOC entry 220 (class 3079 OID 16627)
+-- Name: tablefunc; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS tablefunc WITH SCHEMA public;
+
+
+--
+-- TOC entry 3520 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: EXTENSION tablefunc; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION tablefunc IS 'functions that manipulate whole tables, including crosstab';
+
+
+--
+-- TOC entry 205 (class 3079 OID 18040)
+-- Name: unaccent; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
+
+
+--
+-- TOC entry 3521 (class 0 OID 0)
+-- Dependencies: 205
+-- Name: EXTENSION unaccent; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
+
+
+--
+-- TOC entry 217 (class 3079 OID 16743)
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- TOC entry 3522 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
+--
+-- TOC entry 223 (class 3079 OID 16430)
+-- Name: xml2; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS xml2 WITH SCHEMA public;
+
+
+--
+-- TOC entry 3523 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: EXTENSION xml2; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION xml2 IS 'XPath querying and XSLT';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 306 (class 1255 OID 3031389)
+-- Name: delete_gra(character varying); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION delete_gra(character varying) RETURNS void
+    LANGUAGE plpgsql
+    AS $_$
+declare
+x integer;
+begin
+select into x idgra from gra where nazwa=$1 ;
+delete from kategorie where gra_idgra = x;
+delete from tworcy where gra_idgra = x;
+delete from gra where idgra= x;
+return;
+end$_$;
+
+
+ALTER FUNCTION public.delete_gra(character varying) OWNER TO xmvwbdee;
+
+--
+-- TOC entry 289 (class 1255 OID 2961967)
+-- Name: insert_advanced(character varying, date, character varying, double precision, boolean, character varying, character varying, character varying, text, text); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION insert_advanced(character varying, date, character varying, double precision, boolean, character varying, character varying, character varying, text, text) RETURNS void
+    LANGUAGE plpgsql
+    AS $_$
+begin
+	insert into gra(nazwa,data_wydania,opis,ocena,multiplayer) values ($1,$2,$3,$4,$5);
+	insert into producenci(nazwa) values ($6);
+	insert into wydawca(nazwa) values ($7);
+	insert into wydawca_pl(nazwa) values ($8);
+	insert into tworcy(producenci_idproducenci,wydawca_idwydawca,wydawca_pl_idwydawca_pl,gra_idgra) values ((SELECT last_value from producenci_idproducenci_seq),(SELECT last_value from wydawca_idwydawca_seq),(SELECT last_value from wydawca_pl_idwydawca_pl_seq),(SELECT last_value from gra_idgra_seq));
+	INSERT INTO kategorie(gra_idgra,kategoria_idkategoria)
+	SELECT (SELECT last_value from gra_idgra_seq),
+	cast(id AS INT)
+	FROM unnest(string_to_array($9, ',')) AS dt(id);
+	INSERT INTO platformy(gra_idgra,platforma_idplatforma)
+	SELECT (SELECT last_value from gra_idgra_seq),
+	cast(id AS INT)
+	FROM unnest(string_to_array($10, ',')) AS plat(id);
+end;
+$_$;
+
+
+ALTER FUNCTION public.insert_advanced(character varying, date, character varying, double precision, boolean, character varying, character varying, character varying, text, text) OWNER TO xmvwbdee;
+
+--
+-- TOC entry 875 (class 1255 OID 3039100)
+-- Name: kategorie_delete(); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION kategorie_delete() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+declare
+kategorie integer;
+begin
+select into kategorie ilosc_kategorii from statystyka;
+update statystyka set ilosc_kategorii=kategorie-1;
+return new ;
+end$$;
+
+
+ALTER FUNCTION public.kategorie_delete() OWNER TO xmvwbdee;
+
+--
+-- TOC entry 305 (class 1255 OID 2894593)
+-- Name: ocena_change(integer, integer); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION ocena_change(integer, integer) RETURNS void
+    LANGUAGE plpgsql
+    AS $_$
+declare x float;
+declare count integer;
+declare count_new integer;
+declare wynik float;
+begin
+select ocena into x from gra where idgra = $1;
+select ilosc_ocen into count from gra where idgra = $1;
+wynik=((x*count)+$2)/(count+1);
+update gra set ocena=wynik where idgra = $1;
+count_new=count+1;
+update gra set ilosc_ocen=count_new where idgra = $1;
+return;                                               
+end;
+$_$;
+
+
+ALTER FUNCTION public.ocena_change(integer, integer) OWNER TO xmvwbdee;
+
+--
+-- TOC entry 877 (class 1255 OID 3039111)
+-- Name: platforma_delete(); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION platforma_delete() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+declare
+platforma integer;
+begin
+select into platforma ilosc_platform from statystyka;
+update statystyka set ilosc_platform=platforma-1;
+return new ;
+end$$;
+
+
+ALTER FUNCTION public.platforma_delete() OWNER TO xmvwbdee;
+
+--
+-- TOC entry 292 (class 1255 OID 2964111)
+-- Name: raport_ilosci(); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION raport_ilosci() RETURNS SETOF double precision
+    LANGUAGE plpgsql
+    AS $$
+begin
+	select count(nazwa) from gra as gry;
+	return next gry;
+	select count(nazwa) from producenci as producenci;
+	select count(nazwa) from platforma as platformy;
+	select count(nazwa) from wydawca as wydawcy;
+	select avg(ocena) from gra as srednia;
+	--return table select * from gry;
+end;
+$$;
+
+
+ALTER FUNCTION public.raport_ilosci() OWNER TO xmvwbdee;
+
+--
+-- TOC entry 290 (class 1255 OID 2964115)
+-- Name: raport_iloscii(); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION raport_iloscii() RETURNS text
+    LANGUAGE plpgsql
+    AS $$
+declare 
+result text := '';
+begin
+	select count(nazwa) from gra as gry;
+	select count(nazwa) from producenci as producenci;
+	select count(nazwa) from platforma as platformy;
+	select count(nazwa) from wydawca as wydawcy;
+	select avg(ocena) from gra as srednia;
+	return result;
+end;
+$$;
+
+
+ALTER FUNCTION public.raport_iloscii() OWNER TO xmvwbdee;
+
+--
+-- TOC entry 291 (class 1255 OID 2964110)
+-- Name: raport_ilości(); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION "raport_ilości"() RETURNS SETOF double precision
+    LANGUAGE plpgsql
+    AS $$
+begin
+	select count(nazwa) from gra as gry;
+	return next gry;
+	select count(nazwa) from producenci as producenci;
+	select count(nazwa) from platforma as platformy;
+	select count(nazwa) from wydawca as wydawcy;
+	select avg(ocena) from gra as srednia;
+	--return table select * from gry;
+end;
+$$;
+
+
+ALTER FUNCTION public."raport_ilości"() OWNER TO xmvwbdee;
+
+--
+-- TOC entry 878 (class 1255 OID 3039092)
+-- Name: statystyka(); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION statystyka() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+declare
+gry integer;
+oceny integer;
+srednia_new double precision;
+begin
+select into gry ilosc_gier from statystyka;
+update statystyka set ilosc_gier=gry+1;
+select into oceny ilosc_ocen from statystyka;
+update statystyka set ilosc_ocen=oceny+1;
+select into srednia_new avg(ocena) from wszystko;
+update statystyka set srednia = srednia_new;
+return new ;
+end$$;
+
+
+ALTER FUNCTION public.statystyka() OWNER TO xmvwbdee;
+
+--
+-- TOC entry 879 (class 1255 OID 3039096)
+-- Name: statystyka_delete(); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION statystyka_delete() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+declare
+gry integer;
+oceny integer;
+srednia_new double precision;
+begin
+select into gry ilosc_gier from statystyka;
+update statystyka set ilosc_gier=gry-1;
+select into oceny ilosc_ocen from statystyka;
+update statystyka set ilosc_ocen=oceny-1;
+select into srednia_new avg(ocena) from wszystko;
+update statystyka set srednia = srednia_new;
+return new ;
+end$$;
+
+
+ALTER FUNCTION public.statystyka_delete() OWNER TO xmvwbdee;
+
+--
+-- TOC entry 874 (class 1255 OID 3039099)
+-- Name: statystyka_kategorie(); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION statystyka_kategorie() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+declare
+kategorie integer;
+begin
+select into kategorie ilosc_kategorii from statystyka;
+update statystyka set ilosc_kategorii=kategorie+1;
+return new ;
+end$$;
+
+
+ALTER FUNCTION public.statystyka_kategorie() OWNER TO xmvwbdee;
+
+--
+-- TOC entry 876 (class 1255 OID 3039110)
+-- Name: statystyka_platforma(); Type: FUNCTION; Schema: public; Owner: xmvwbdee
+--
+
+CREATE FUNCTION statystyka_platforma() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+declare
+platforma integer;
+begin
+select into platforma ilosc_platform from statystyka;
+update statystyka set ilosc_platform=platforma+1;
+return new ;
+end$$;
+
+
+ALTER FUNCTION public.statystyka_platforma() OWNER TO xmvwbdee;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 184 (class 1259 OID 2832436)
+-- Name: gra; Type: TABLE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TABLE gra (
+    idgra integer NOT NULL,
+    nazwa character varying NOT NULL,
+    data_wydania date,
+    opis character varying,
+    ocena double precision NOT NULL,
+    multiplayer boolean,
+    ilosc_ocen integer DEFAULT 1,
+    CONSTRAINT gra_ocena_check CHECK (((ocena >= (0)::double precision) AND (ocena < (11)::double precision)))
+);
+
+
+ALTER TABLE gra OWNER TO xmvwbdee;
+
+--
+-- TOC entry 186 (class 1259 OID 2832447)
+-- Name: kategoria; Type: TABLE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TABLE kategoria (
+    idkategoria integer NOT NULL,
+    nazwa character varying NOT NULL
+);
+
+
+ALTER TABLE kategoria OWNER TO xmvwbdee;
+
+--
+-- TOC entry 189 (class 1259 OID 2832467)
+-- Name: kategorie; Type: TABLE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TABLE kategorie (
+    gra_idgra integer NOT NULL,
+    kategoria_idkategoria integer NOT NULL
+);
+
+
+ALTER TABLE kategorie OWNER TO xmvwbdee;
+
+--
+-- TOC entry 178 (class 1259 OID 2832403)
+-- Name: platforma; Type: TABLE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TABLE platforma (
+    idplatforma integer NOT NULL,
+    nazwa character varying NOT NULL,
+    producent character varying
+);
+
+
+ALTER TABLE platforma OWNER TO xmvwbdee;
+
+--
+-- TOC entry 190 (class 1259 OID 2832486)
+-- Name: platformy; Type: TABLE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TABLE platformy (
+    platforma_idplatforma integer NOT NULL,
+    gra_idgra integer NOT NULL
+);
+
+
+ALTER TABLE platformy OWNER TO xmvwbdee;
+
+--
+-- TOC entry 182 (class 1259 OID 2832425)
+-- Name: producenci; Type: TABLE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TABLE producenci (
+    idproducenci integer NOT NULL,
+    nazwa character varying
+);
+
+
+ALTER TABLE producenci OWNER TO xmvwbdee;
+
+--
+-- TOC entry 192 (class 1259 OID 2832507)
+-- Name: tworcy; Type: TABLE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TABLE tworcy (
+    idtworcy integer NOT NULL,
+    producenci_idproducenci integer NOT NULL,
+    wydawca_idwydawca integer NOT NULL,
+    wydawca_pl_idwydawca_pl integer NOT NULL,
+    gra_idgra integer NOT NULL
+);
+
+
+ALTER TABLE tworcy OWNER TO xmvwbdee;
+
+--
+-- TOC entry 180 (class 1259 OID 2832414)
+-- Name: wydawca; Type: TABLE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TABLE wydawca (
+    idwydawca integer NOT NULL,
+    nazwa character varying
+);
+
+
+ALTER TABLE wydawca OWNER TO xmvwbdee;
+
+--
+-- TOC entry 188 (class 1259 OID 2832458)
+-- Name: wydawca_pl; Type: TABLE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TABLE wydawca_pl (
+    idwydawca_pl integer NOT NULL,
+    nazwa character varying
+);
+
+
+ALTER TABLE wydawca_pl OWNER TO xmvwbdee;
+
+--
+-- TOC entry 193 (class 1259 OID 2963070)
+-- Name: advanced_show; Type: VIEW; Schema: public; Owner: xmvwbdee
+--
+
+CREATE VIEW advanced_show AS
+ SELECT gra.nazwa,
+    gra.data_wydania,
+    gra.opis,
+    gra.ocena,
+    gra.multiplayer,
+    gra.ilosc_ocen,
+    producenci.nazwa AS producent,
+    wydawca.nazwa AS wydawca,
+    wydawca_pl.nazwa AS wydawca_pl,
+    kategoria.nazwa AS kategoria,
+    platforma.nazwa AS platforma,
+    platforma.producent AS platforma_producent
+   FROM gra,
+    kategoria,
+    kategorie,
+    platforma,
+    platformy,
+    producenci,
+    tworcy,
+    wydawca,
+    wydawca_pl
+  WHERE ((((((((gra.idgra = tworcy.gra_idgra) AND (gra.idgra = kategorie.gra_idgra)) AND (gra.idgra = platformy.gra_idgra)) AND (kategoria.idkategoria = kategorie.kategoria_idkategoria)) AND (platforma.idplatforma = platformy.platforma_idplatforma)) AND (producenci.idproducenci = tworcy.producenci_idproducenci)) AND (wydawca.idwydawca = tworcy.wydawca_idwydawca)) AND (wydawca_pl.idwydawca_pl = tworcy.wydawca_pl_idwydawca_pl));
+
+
+ALTER TABLE advanced_show OWNER TO xmvwbdee;
+
+--
+-- TOC entry 183 (class 1259 OID 2832434)
+-- Name: gra_idgra_seq; Type: SEQUENCE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE SEQUENCE gra_idgra_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE gra_idgra_seq OWNER TO xmvwbdee;
+
+--
+-- TOC entry 3524 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: gra_idgra_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: xmvwbdee
+--
+
+ALTER SEQUENCE gra_idgra_seq OWNED BY gra.idgra;
+
+
+--
+-- TOC entry 185 (class 1259 OID 2832445)
+-- Name: kategoria_idkategoria_seq; Type: SEQUENCE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE SEQUENCE kategoria_idkategoria_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE kategoria_idkategoria_seq OWNER TO xmvwbdee;
+
+--
+-- TOC entry 3525 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: kategoria_idkategoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: xmvwbdee
+--
+
+ALTER SEQUENCE kategoria_idkategoria_seq OWNED BY kategoria.idkategoria;
+
+
+--
+-- TOC entry 194 (class 1259 OID 2963082)
+-- Name: wszystko; Type: VIEW; Schema: public; Owner: xmvwbdee
+--
+
+CREATE VIEW wszystko AS
+ SELECT advanced_show.nazwa,
+    advanced_show.data_wydania,
+    advanced_show.opis,
+    advanced_show.ocena,
+    advanced_show.multiplayer,
+    advanced_show.ilosc_ocen,
+    advanced_show.producent,
+    advanced_show.wydawca,
+    advanced_show.wydawca_pl,
+    advanced_show.kategoria,
+    advanced_show.platforma,
+    advanced_show.platforma_producent
+   FROM advanced_show
+UNION
+ SELECT gra.nazwa,
+    gra.data_wydania,
+    gra.opis,
+    gra.ocena,
+    gra.multiplayer,
+    gra.ilosc_ocen,
+    NULL::character varying AS producent,
+    NULL::character varying AS wydawca,
+    NULL::character varying AS wydawca_pl,
+    NULL::character varying AS kategoria,
+    NULL::character varying AS platforma,
+    NULL::character varying AS platforma_producent
+   FROM gra
+  ORDER BY 1;
+
+
+ALTER TABLE wszystko OWNER TO xmvwbdee;
+
+--
+-- TOC entry 197 (class 1259 OID 3020034)
+-- Name: kategorie_platformy; Type: VIEW; Schema: public; Owner: xmvwbdee
+--
+
+CREATE VIEW kategorie_platformy AS
+ SELECT wszystko.nazwa,
+    array_agg(DISTINCT wszystko.kategoria) AS kategorie,
+    array_agg(DISTINCT wszystko.platforma) AS platformy
+   FROM wszystko
+  WHERE (wszystko.kategoria IS NOT NULL)
+  GROUP BY wszystko.nazwa;
+
+
+ALTER TABLE kategorie_platformy OWNER TO xmvwbdee;
+
+--
+-- TOC entry 196 (class 1259 OID 2964057)
+-- Name: kategorie_view; Type: VIEW; Schema: public; Owner: xmvwbdee
+--
+
+CREATE VIEW kategorie_view AS
+ SELECT kategoria.nazwa AS kategoria,
+    gra.nazwa AS nazwa_gry
+   FROM gra,
+    kategoria,
+    kategorie
+  WHERE ((gra.idgra = kategorie.gra_idgra) AND (kategoria.idkategoria = kategorie.kategoria_idkategoria))
+  ORDER BY kategoria.nazwa;
+
+
+ALTER TABLE kategorie_view OWNER TO xmvwbdee;
+
+--
+-- TOC entry 177 (class 1259 OID 2832401)
+-- Name: platforma_idplatforma_seq; Type: SEQUENCE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE SEQUENCE platforma_idplatforma_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE platforma_idplatforma_seq OWNER TO xmvwbdee;
+
+--
+-- TOC entry 3526 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: platforma_idplatforma_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: xmvwbdee
+--
+
+ALTER SEQUENCE platforma_idplatforma_seq OWNED BY platforma.idplatforma;
+
+
+--
+-- TOC entry 181 (class 1259 OID 2832423)
+-- Name: producenci_idproducenci_seq; Type: SEQUENCE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE SEQUENCE producenci_idproducenci_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE producenci_idproducenci_seq OWNER TO xmvwbdee;
+
+--
+-- TOC entry 3527 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: producenci_idproducenci_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: xmvwbdee
+--
+
+ALTER SEQUENCE producenci_idproducenci_seq OWNED BY producenci.idproducenci;
+
+
+--
+-- TOC entry 195 (class 1259 OID 2964051)
+-- Name: producenci_view; Type: VIEW; Schema: public; Owner: xmvwbdee
+--
+
+CREATE VIEW producenci_view AS
+ SELECT DISTINCT producenci.nazwa
+   FROM producenci
+  ORDER BY producenci.nazwa;
+
+
+ALTER TABLE producenci_view OWNER TO xmvwbdee;
+
+--
+-- TOC entry 200 (class 1259 OID 3038301)
+-- Name: statystyka; Type: TABLE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TABLE statystyka (
+    ilosc_gier integer,
+    ilosc_ocen integer,
+    ilosc_kategorii integer,
+    ilosc_platform integer,
+    srednia double precision
+);
+
+
+ALTER TABLE statystyka OWNER TO xmvwbdee;
+
+--
+-- TOC entry 198 (class 1259 OID 3020681)
+-- Name: szukanie; Type: VIEW; Schema: public; Owner: xmvwbdee
+--
+
+CREATE VIEW szukanie AS
+ SELECT wszystko.nazwa,
+    array_agg(DISTINCT wszystko.data_wydania) AS data_wydania,
+    array_agg(DISTINCT wszystko.opis) AS opis,
+    array_agg(DISTINCT wszystko.ocena) AS ocena,
+    array_agg(DISTINCT wszystko.multiplayer) AS multiplayer,
+    array_agg(DISTINCT wszystko.ilosc_ocen) AS ilosc_ocen,
+    array_agg(DISTINCT wszystko.producent) AS producent,
+    array_agg(DISTINCT wszystko.wydawca) AS wydawca,
+    array_agg(DISTINCT wszystko.wydawca_pl) AS wydawca_pl,
+    array_agg(DISTINCT wszystko.kategoria) AS kategoria,
+    array_agg(DISTINCT wszystko.platforma) AS platformy
+   FROM wszystko
+  WHERE (wszystko.kategoria IS NOT NULL)
+  GROUP BY wszystko.nazwa;
+
+
+ALTER TABLE szukanie OWNER TO xmvwbdee;
+
+--
+-- TOC entry 199 (class 1259 OID 3022921)
+-- Name: szukanie_kategorii; Type: VIEW; Schema: public; Owner: xmvwbdee
+--
+
+CREATE VIEW szukanie_kategorii AS
+ SELECT kategorie_view.kategoria,
+    kategorie_view.nazwa_gry,
+    gra.ocena
+   FROM (kategorie_view
+     JOIN gra ON (((gra.nazwa)::text = (kategorie_view.nazwa_gry)::text)));
+
+
+ALTER TABLE szukanie_kategorii OWNER TO xmvwbdee;
+
+--
+-- TOC entry 191 (class 1259 OID 2832505)
+-- Name: tworcy_idtworcy_seq; Type: SEQUENCE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE SEQUENCE tworcy_idtworcy_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE tworcy_idtworcy_seq OWNER TO xmvwbdee;
+
+--
+-- TOC entry 3528 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: tworcy_idtworcy_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: xmvwbdee
+--
+
+ALTER SEQUENCE tworcy_idtworcy_seq OWNED BY tworcy.idtworcy;
+
+
+--
+-- TOC entry 179 (class 1259 OID 2832412)
+-- Name: wydawca_idwydawca_seq; Type: SEQUENCE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE SEQUENCE wydawca_idwydawca_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE wydawca_idwydawca_seq OWNER TO xmvwbdee;
+
+--
+-- TOC entry 3529 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: wydawca_idwydawca_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: xmvwbdee
+--
+
+ALTER SEQUENCE wydawca_idwydawca_seq OWNED BY wydawca.idwydawca;
+
+
+--
+-- TOC entry 187 (class 1259 OID 2832456)
+-- Name: wydawca_pl_idwydawca_pl_seq; Type: SEQUENCE; Schema: public; Owner: xmvwbdee
+--
+
+CREATE SEQUENCE wydawca_pl_idwydawca_pl_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE wydawca_pl_idwydawca_pl_seq OWNER TO xmvwbdee;
+
+--
+-- TOC entry 3530 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: wydawca_pl_idwydawca_pl_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: xmvwbdee
+--
+
+ALTER SEQUENCE wydawca_pl_idwydawca_pl_seq OWNED BY wydawca_pl.idwydawca_pl;
+
+
+--
+-- TOC entry 3302 (class 2604 OID 2832439)
+-- Name: idgra; Type: DEFAULT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY gra ALTER COLUMN idgra SET DEFAULT nextval('gra_idgra_seq'::regclass);
+
+
+--
+-- TOC entry 3305 (class 2604 OID 2832450)
+-- Name: idkategoria; Type: DEFAULT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY kategoria ALTER COLUMN idkategoria SET DEFAULT nextval('kategoria_idkategoria_seq'::regclass);
+
+
+--
+-- TOC entry 3299 (class 2604 OID 2832406)
+-- Name: idplatforma; Type: DEFAULT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY platforma ALTER COLUMN idplatforma SET DEFAULT nextval('platforma_idplatforma_seq'::regclass);
+
+
+--
+-- TOC entry 3301 (class 2604 OID 2832428)
+-- Name: idproducenci; Type: DEFAULT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY producenci ALTER COLUMN idproducenci SET DEFAULT nextval('producenci_idproducenci_seq'::regclass);
+
+
+--
+-- TOC entry 3307 (class 2604 OID 2832510)
+-- Name: idtworcy; Type: DEFAULT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY tworcy ALTER COLUMN idtworcy SET DEFAULT nextval('tworcy_idtworcy_seq'::regclass);
+
+
+--
+-- TOC entry 3300 (class 2604 OID 2832417)
+-- Name: idwydawca; Type: DEFAULT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY wydawca ALTER COLUMN idwydawca SET DEFAULT nextval('wydawca_idwydawca_seq'::regclass);
+
+
+--
+-- TOC entry 3306 (class 2604 OID 2832461)
+-- Name: idwydawca_pl; Type: DEFAULT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY wydawca_pl ALTER COLUMN idwydawca_pl SET DEFAULT nextval('wydawca_pl_idwydawca_pl_seq'::regclass);
+
+
+--
+-- TOC entry 3483 (class 0 OID 2832436)
+-- Dependencies: 184
+-- Data for Name: gra; Type: TABLE DATA; Schema: public; Owner: xmvwbdee
+--
+
+COPY gra (idgra, nazwa, data_wydania, opis, ocena, multiplayer, ilosc_ocen) FROM stdin;
+7	Fable	2002-10-11	Super	5	f	1
+5	World of Warcraft	2004-01-11	MMORRS	4.28571428571428559	t	7
+43	Diablo	1999-09-09	Klasyk	10	t	1
+\.
+
+
+--
+-- TOC entry 3531 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: gra_idgra_seq; Type: SEQUENCE SET; Schema: public; Owner: xmvwbdee
+--
+
+SELECT pg_catalog.setval('gra_idgra_seq', 43, true);
+
+
+--
+-- TOC entry 3485 (class 0 OID 2832447)
+-- Dependencies: 186
+-- Data for Name: kategoria; Type: TABLE DATA; Schema: public; Owner: xmvwbdee
+--
+
+COPY kategoria (idkategoria, nazwa) FROM stdin;
+2	Akcja
+6	RPG
+8	MMORPG
+10	RTS
+11	FPS
+\.
+
+
+--
+-- TOC entry 3532 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: kategoria_idkategoria_seq; Type: SEQUENCE SET; Schema: public; Owner: xmvwbdee
+--
+
+SELECT pg_catalog.setval('kategoria_idkategoria_seq', 13, true);
+
+
+--
+-- TOC entry 3488 (class 0 OID 2832467)
+-- Dependencies: 189
+-- Data for Name: kategorie; Type: TABLE DATA; Schema: public; Owner: xmvwbdee
+--
+
+COPY kategorie (gra_idgra, kategoria_idkategoria) FROM stdin;
+43	2
+43	6
+\.
+
+
+--
+-- TOC entry 3477 (class 0 OID 2832403)
+-- Dependencies: 178
+-- Data for Name: platforma; Type: TABLE DATA; Schema: public; Owner: xmvwbdee
+--
+
+COPY platforma (idplatforma, nazwa, producent) FROM stdin;
+1	PS4	Sony
+2	PC	Sony
+3	PSP	Sony
+6	PS2	Sony
+7	Amiga	
+8	Xbox	Microsoft
+\.
+
+
+--
+-- TOC entry 3533 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: platforma_idplatforma_seq; Type: SEQUENCE SET; Schema: public; Owner: xmvwbdee
+--
+
+SELECT pg_catalog.setval('platforma_idplatforma_seq', 8, true);
+
+
+--
+-- TOC entry 3489 (class 0 OID 2832486)
+-- Dependencies: 190
+-- Data for Name: platformy; Type: TABLE DATA; Schema: public; Owner: xmvwbdee
+--
+
+COPY platformy (platforma_idplatforma, gra_idgra) FROM stdin;
+1	12
+1	14
+1	17
+1	18
+1	19
+1	20
+1	21
+2	22
+1	28
+3	28
+1	29
+1	30
+1	31
+3	31
+1	32
+3	32
+2	34
+6	34
+4	34
+2	43
+8	43
+\.
+
+
+--
+-- TOC entry 3481 (class 0 OID 2832425)
+-- Dependencies: 182
+-- Data for Name: producenci; Type: TABLE DATA; Schema: public; Owner: xmvwbdee
+--
+
+COPY producenci (idproducenci, nazwa) FROM stdin;
+2	EA
+3	EA
+4	EA
+5	EA
+6	EA
+7	waedsa
+8	waedsa
+9	waedsa
+10	wqeqweq
+11	asdasda
+12	sadsad
+13	sadsad
+14	dasdas
+15	
+16	42352
+17	Blizzard
+\.
+
+
+--
+-- TOC entry 3534 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: producenci_idproducenci_seq; Type: SEQUENCE SET; Schema: public; Owner: xmvwbdee
+--
+
+SELECT pg_catalog.setval('producenci_idproducenci_seq', 17, true);
+
+
+--
+-- TOC entry 3492 (class 0 OID 3038301)
+-- Dependencies: 200
+-- Data for Name: statystyka; Type: TABLE DATA; Schema: public; Owner: xmvwbdee
+--
+
+COPY statystyka (ilosc_gier, ilosc_ocen, ilosc_kategorii, ilosc_platform, srednia) FROM stdin;
+3	9	5	6	8.46938775510204067
+\.
+
+
+--
+-- TOC entry 3491 (class 0 OID 2832507)
+-- Dependencies: 192
+-- Data for Name: tworcy; Type: TABLE DATA; Schema: public; Owner: xmvwbdee
+--
+
+COPY tworcy (idtworcy, producenci_idproducenci, wydawca_idwydawca, wydawca_pl_idwydawca_pl, gra_idgra) FROM stdin;
+16	17	17	17	43
+\.
+
+
+--
+-- TOC entry 3535 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: tworcy_idtworcy_seq; Type: SEQUENCE SET; Schema: public; Owner: xmvwbdee
+--
+
+SELECT pg_catalog.setval('tworcy_idtworcy_seq', 16, true);
+
+
+--
+-- TOC entry 3479 (class 0 OID 2832414)
+-- Dependencies: 180
+-- Data for Name: wydawca; Type: TABLE DATA; Schema: public; Owner: xmvwbdee
+--
+
+COPY wydawca (idwydawca, nazwa) FROM stdin;
+2	EA
+3	EA
+4	EA
+5	EA
+6	EA
+7	asdas
+8	asdas
+9	asdas
+10	eqweqw
+11	sdasdasd
+12	asdas
+13	asdas
+14	dasdasd
+15	
+16	23423
+17	Blizzard
+\.
+
+
+--
+-- TOC entry 3536 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: wydawca_idwydawca_seq; Type: SEQUENCE SET; Schema: public; Owner: xmvwbdee
+--
+
+SELECT pg_catalog.setval('wydawca_idwydawca_seq', 17, true);
+
+
+--
+-- TOC entry 3487 (class 0 OID 2832458)
+-- Dependencies: 188
+-- Data for Name: wydawca_pl; Type: TABLE DATA; Schema: public; Owner: xmvwbdee
+--
+
+COPY wydawca_pl (idwydawca_pl, nazwa) FROM stdin;
+2	CDprojekt
+3	CDprojekt
+4	CDprojekt
+5	CDprojekt
+6	CDprojekt
+7	dasd
+8	dasd
+9	dasd
+10	qweqwe
+11	asdasd
+12	dasd
+13	dasd
+14	asd
+15	
+16	33
+17	CDproject
+\.
+
+
+--
+-- TOC entry 3537 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: wydawca_pl_idwydawca_pl_seq; Type: SEQUENCE SET; Schema: public; Owner: xmvwbdee
+--
+
+SELECT pg_catalog.setval('wydawca_pl_idwydawca_pl_seq', 17, true);
+
+
+--
+-- TOC entry 3317 (class 2606 OID 2832444)
+-- Name: gra_pkey; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY gra
+    ADD CONSTRAINT gra_pkey PRIMARY KEY (idgra);
+
+
+--
+-- TOC entry 3321 (class 2606 OID 2832455)
+-- Name: kategoria_pkey; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY kategoria
+    ADD CONSTRAINT kategoria_pkey PRIMARY KEY (idkategoria);
+
+
+--
+-- TOC entry 3323 (class 2606 OID 2894066)
+-- Name: kategoria_unique; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY kategoria
+    ADD CONSTRAINT kategoria_unique UNIQUE (nazwa);
+
+
+--
+-- TOC entry 3329 (class 2606 OID 2832471)
+-- Name: kategorie_pkey; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY kategorie
+    ADD CONSTRAINT kategorie_pkey PRIMARY KEY (gra_idgra, kategoria_idkategoria);
+
+
+--
+-- TOC entry 3319 (class 2606 OID 2894062)
+-- Name: nazwa_unique; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY gra
+    ADD CONSTRAINT nazwa_unique UNIQUE (nazwa);
+
+
+--
+-- TOC entry 3309 (class 2606 OID 2832411)
+-- Name: platforma_pkey; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY platforma
+    ADD CONSTRAINT platforma_pkey PRIMARY KEY (idplatforma);
+
+
+--
+-- TOC entry 3337 (class 2606 OID 2832490)
+-- Name: platformy_pkey; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY platformy
+    ADD CONSTRAINT platformy_pkey PRIMARY KEY (platforma_idplatforma, gra_idgra);
+
+
+--
+-- TOC entry 3315 (class 2606 OID 2832433)
+-- Name: producenci_pkey; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY producenci
+    ADD CONSTRAINT producenci_pkey PRIMARY KEY (idproducenci);
+
+
+--
+-- TOC entry 3347 (class 2606 OID 2832512)
+-- Name: tworcy_pkey; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY tworcy
+    ADD CONSTRAINT tworcy_pkey PRIMARY KEY (idtworcy, producenci_idproducenci, wydawca_idwydawca, wydawca_pl_idwydawca_pl, gra_idgra);
+
+
+--
+-- TOC entry 3311 (class 2606 OID 3046589)
+-- Name: unique_platforma; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY platforma
+    ADD CONSTRAINT unique_platforma UNIQUE (nazwa);
+
+
+--
+-- TOC entry 3313 (class 2606 OID 2832422)
+-- Name: wydawca_pkey; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY wydawca
+    ADD CONSTRAINT wydawca_pkey PRIMARY KEY (idwydawca);
+
+
+--
+-- TOC entry 3325 (class 2606 OID 2832466)
+-- Name: wydawca_pl_pkey; Type: CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY wydawca_pl
+    ADD CONSTRAINT wydawca_pl_pkey PRIMARY KEY (idwydawca_pl);
+
+
+--
+-- TOC entry 3338 (class 1259 OID 2832537)
+-- Name: ifk_producenci; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX ifk_producenci ON tworcy USING btree (producenci_idproducenci);
+
+
+--
+-- TOC entry 3326 (class 1259 OID 2832485)
+-- Name: ifk_relacja1a; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX ifk_relacja1a ON kategorie USING btree (gra_idgra);
+
+
+--
+-- TOC entry 3327 (class 1259 OID 2832484)
+-- Name: ifk_relacja1b; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX ifk_relacja1b ON kategorie USING btree (kategoria_idkategoria);
+
+
+--
+-- TOC entry 3332 (class 1259 OID 2832504)
+-- Name: ifk_relacja2a; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX ifk_relacja2a ON platformy USING btree (gra_idgra);
+
+
+--
+-- TOC entry 3333 (class 1259 OID 2832503)
+-- Name: ifk_relacja2b; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX ifk_relacja2b ON platformy USING btree (platforma_idplatforma);
+
+
+--
+-- TOC entry 3339 (class 1259 OID 2832540)
+-- Name: ifk_tworcy; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX ifk_tworcy ON tworcy USING btree (gra_idgra);
+
+
+--
+-- TOC entry 3340 (class 1259 OID 2832538)
+-- Name: ifk_wydawca; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX ifk_wydawca ON tworcy USING btree (wydawca_idwydawca);
+
+
+--
+-- TOC entry 3341 (class 1259 OID 2832539)
+-- Name: ifk_wydawcapl; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX ifk_wydawcapl ON tworcy USING btree (wydawca_pl_idwydawca_pl);
+
+
+--
+-- TOC entry 3334 (class 1259 OID 2832501)
+-- Name: platformy_fkindex1; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX platformy_fkindex1 ON platformy USING btree (platforma_idplatforma);
+
+
+--
+-- TOC entry 3335 (class 1259 OID 2832502)
+-- Name: platformy_fkindex2; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX platformy_fkindex2 ON platformy USING btree (gra_idgra);
+
+
+--
+-- TOC entry 3330 (class 1259 OID 2832482)
+-- Name: table_08_fkindex1; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX table_08_fkindex1 ON kategorie USING btree (kategoria_idkategoria);
+
+
+--
+-- TOC entry 3331 (class 1259 OID 2832483)
+-- Name: table_08_fkindex2; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX table_08_fkindex2 ON kategorie USING btree (gra_idgra);
+
+
+--
+-- TOC entry 3342 (class 1259 OID 2832533)
+-- Name: tworcy_fkindex1; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX tworcy_fkindex1 ON tworcy USING btree (producenci_idproducenci);
+
+
+--
+-- TOC entry 3343 (class 1259 OID 2832534)
+-- Name: tworcy_fkindex2; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX tworcy_fkindex2 ON tworcy USING btree (wydawca_idwydawca);
+
+
+--
+-- TOC entry 3344 (class 1259 OID 2832535)
+-- Name: tworcy_fkindex3; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX tworcy_fkindex3 ON tworcy USING btree (wydawca_pl_idwydawca_pl);
+
+
+--
+-- TOC entry 3345 (class 1259 OID 2832536)
+-- Name: tworcy_fkindex4; Type: INDEX; Schema: public; Owner: xmvwbdee
+--
+
+CREATE INDEX tworcy_fkindex4 ON tworcy USING btree (gra_idgra);
+
+
+--
+-- TOC entry 3355 (class 2620 OID 3039095)
+-- Name: dodawanie_gra; Type: TRIGGER; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TRIGGER dodawanie_gra AFTER INSERT ON gra FOR EACH STATEMENT EXECUTE PROCEDURE statystyka();
+
+
+--
+-- TOC entry 3358 (class 2620 OID 3039102)
+-- Name: dodawanie_kategorie; Type: TRIGGER; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TRIGGER dodawanie_kategorie AFTER INSERT ON kategoria FOR EACH STATEMENT EXECUTE PROCEDURE statystyka_kategorie();
+
+
+--
+-- TOC entry 3354 (class 2620 OID 3039113)
+-- Name: dodawanie_platforma; Type: TRIGGER; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TRIGGER dodawanie_platforma AFTER INSERT ON platforma FOR EACH STATEMENT EXECUTE PROCEDURE statystyka_platforma();
+
+
+--
+-- TOC entry 3356 (class 2620 OID 3039098)
+-- Name: usuwanie_gra; Type: TRIGGER; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TRIGGER usuwanie_gra AFTER DELETE ON gra FOR EACH STATEMENT EXECUTE PROCEDURE statystyka_delete();
+
+
+--
+-- TOC entry 3357 (class 2620 OID 3039101)
+-- Name: usuwanie_kategoria; Type: TRIGGER; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TRIGGER usuwanie_kategoria AFTER DELETE ON kategoria FOR EACH STATEMENT EXECUTE PROCEDURE kategorie_delete();
+
+
+--
+-- TOC entry 3353 (class 2620 OID 3039112)
+-- Name: usuwanie_platforma; Type: TRIGGER; Schema: public; Owner: xmvwbdee
+--
+
+CREATE TRIGGER usuwanie_platforma AFTER DELETE ON platforma FOR EACH STATEMENT EXECUTE PROCEDURE platforma_delete();
+
+
+--
+-- TOC entry 3348 (class 2606 OID 2832477)
+-- Name: kategorie_gra_idgra_fkey; Type: FK CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY kategorie
+    ADD CONSTRAINT kategorie_gra_idgra_fkey FOREIGN KEY (gra_idgra) REFERENCES gra(idgra);
+
+
+--
+-- TOC entry 3352 (class 2606 OID 2832528)
+-- Name: tworcy_gra_idgra_fkey; Type: FK CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY tworcy
+    ADD CONSTRAINT tworcy_gra_idgra_fkey FOREIGN KEY (gra_idgra) REFERENCES gra(idgra);
+
+
+--
+-- TOC entry 3349 (class 2606 OID 2832513)
+-- Name: tworcy_producenci_idproducenci_fkey; Type: FK CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY tworcy
+    ADD CONSTRAINT tworcy_producenci_idproducenci_fkey FOREIGN KEY (producenci_idproducenci) REFERENCES producenci(idproducenci);
+
+
+--
+-- TOC entry 3350 (class 2606 OID 2832518)
+-- Name: tworcy_wydawca_idwydawca_fkey; Type: FK CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY tworcy
+    ADD CONSTRAINT tworcy_wydawca_idwydawca_fkey FOREIGN KEY (wydawca_idwydawca) REFERENCES wydawca(idwydawca);
+
+
+--
+-- TOC entry 3351 (class 2606 OID 2832523)
+-- Name: tworcy_wydawca_pl_idwydawca_pl_fkey; Type: FK CONSTRAINT; Schema: public; Owner: xmvwbdee
+--
+
+ALTER TABLE ONLY tworcy
+    ADD CONSTRAINT tworcy_wydawca_pl_idwydawca_pl_fkey FOREIGN KEY (wydawca_pl_idwydawca_pl) REFERENCES wydawca_pl(idwydawca_pl);
+
+
+--
+-- TOC entry 3499 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2016-01-17 00:41:01
+
+--
+-- PostgreSQL database dump complete
+--
+

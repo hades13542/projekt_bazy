@@ -48,7 +48,7 @@ class baza extends controller
         $string = "Witaj w encyklopedii gier komputerowych, wybierz interesującą Cię funkcję z menu po lewej.<br><br><br><br>Obecnie w naszej bazie znajduje się: ";
         $response = $this->model->getStatystyki();
         foreach($response as $row){
-            $string = $string .$row['ilosc_gier'].' gier podzielonych na '. $row['ilosc_kategorii'] .' kategorii oraz '.$row['ilosc_platform']. ' platform<br>Wystawiono ' .$row['ilosc_ocen'].' oceny co daje średnio '.round($row['srednia'],2).' na grę!<br>';
+            $string = $string .$row['ilosc_gier'].' gier podzielonych na '. $row['ilosc_kategorii'] .' kategorii oraz '.$row['ilosc_platform']. ' platform<br>Wystawiono ' .$row['ilosc_ocen'].' oceny. Średnia ocena gier w bazie to '.round($row['srednia'],2).' !<br>';
         }
 
         return $string ;
