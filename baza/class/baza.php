@@ -406,15 +406,20 @@ class baza extends controller
 	$Content = str_replace("{","",$row['opis']);
 	$opis = str_replace("}","",$Content);
 	$Content = str_replace("{","",$row['kategoria']);
-	$kategoria = str_replace("}","",$Content);
+	$kategoria_1 = str_replace("}","",$Content);
+    $kategoria = str_replace("NULL","",$kategoria_1);
 	$Content = str_replace("{","",$row['wydawca']);
-	$wydawca = str_replace("}","",$Content);
+	$wydawca_1 = str_replace("}","",$Content);
+    $wydawca = str_replace("NULL","",$wydawca_1);
 	$Content = str_replace("{","",$row['producent']);
-	$producent = str_replace("}","",$Content);
-	$Content = str_replace("{","",$row['wydawca_pl']);
-	$wydawca_pl = str_replace("}","",$Content);
+	$producent_1 = str_replace("}","",$Content);
+    $producent = str_replace("NULL","",$producent_1);
+    $Content = str_replace("{","",$row['wydawca_pl']);
+	$wydawca_pl_1 = str_replace("}","",$Content);
+    $wydawca_pl = str_replace("NULL","",$wydawca_pl_1);
 	$Content = str_replace("{","",$row['platformy']);
-	$platformy = str_replace("}","",$Content);
+	$platformy_1 = str_replace("}","",$Content);
+    $platformy = str_replace("NULL","",$platformy_1);
 	$Content = str_replace("{","",$row['ilosc_ocen']);
 	$ilosc_ocen = str_replace("}","",$Content);
             if ($row['multiplayer'] == 'f'){
